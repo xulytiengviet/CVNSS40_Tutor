@@ -35,7 +35,7 @@ Phần (A) cần bạn kết nối một host do mình quản lý và bật tri�
 
 ## Hướng triển khai sẵn trong repository
 
-Đã có [Render Blueprint](../../render.yaml), [MCP Dockerfile](../../deploy/cvnss-mcp/Dockerfile) và [hướng dẫn triển khai từng bước](../../deploy/cvnss-mcp/README.md). Blueprint kết nối với GitHub trên nhánh `main`, tự triển khai khi CI xanh. Bản hosted ở giai đoạn này chỉ có 6 công cụ công khai, không đăng nhập, không có bộ nhớ cá nhân; trong ChatGPT chọn **No authentication**. OAuth 2.1 là hạng mục riêng nếu mở rộng ghi dữ liệu hoặc cá nhân hóa.
+Đã có [Render Blueprint](../../render.yaml), [MCP Dockerfile](../../deploy/cvnss-mcp/Dockerfile) và [hướng dẫn triển khai từng bước](../../deploy/cvnss-mcp/README.md). Blueprint kết nối với GitHub trên nhánh `main`, tự triển khai khi CI xanh. Bản hosted ở giai đoạn này chỉ có 7 công cụ công khai, không đăng nhập, không có bộ nhớ cá nhân; trong ChatGPT chọn **No authentication**. OAuth 2.1 là hạng mục riêng nếu mở rộng ghi dữ liệu hoặc cá nhân hóa.
 
 ## 1. Hai loại gói plugin
 
@@ -47,7 +47,7 @@ Chạy tại thư mục root:
 py scripts/build_cvnss_chatgpt_plugin.py
 ```
 
-Kết quả: `dist/cvnss4-knowledge-hub-0.1.0.zip`, gồm `plugin.json` và `skills/cvnss4-tutor/SKILL.md`. Đây là hướng dẫn nghiệp vụ CVNSS4.0 cho AI, **không có công cụ chuyển đổi trực tuyến**, không có GitHub sync. File ZIP được tạo lại bằng GitHub Actions và đính kèm ở mục Artifacts của run CI `CVNSS4.0 Hub smoke tests`.
+Kết quả: `dist/cvnss4-knowledge-hub-0.2.0.zip`, gồm `plugin.json` và `skills/cvnss4-tutor/SKILL.md`. Đây là hướng dẫn nghiệp vụ CVNSS4.0 cho AI, **không có công cụ chuyển đổi trực tuyến**, không có GitHub sync. File ZIP được tạo lại bằng GitHub Actions và đính kèm ở mục Artifacts của run CI `CVNSS4.0 Hub smoke tests`.
 
 ### 1B. Gói Skills + MCP remote (cần URL thật trước)
 
@@ -100,7 +100,7 @@ Nếu chọn Render, tích hợp GitHub có thể tự tái triển khai khi com
 
 - Server `cvnss_hub.mcp_server --http` hiện cố ý không cho bind `0.0.0.0` nếu không có reverse proxy/tunnel bảo vệ. **Không gỡ chặn một cách tùy tiện**.
 - Nếu muốn public endpoint có xác thực, cần thiết kế OAuth hoặc auth gateway tương thích ChatGPT trước khi công bố URL. Việc cho phép `--trusted-hostname` chỉ bảo vệ Host/Origin, **không** cung cấp auth.
-- Bộ công cụ hiện chỉ đọc: convert, inspect, candidates, audit, self_test, sources. Chưa có tool ghi tiến độ, đồng bộ người dùng, crawl thư viện, xây RAG.
+- Bộ công cụ hiện chỉ đọc: convert, inspect, candidates, audit, self_test, sources, knowledge. Chưa có tool ghi tiến độ, đồng bộ người dùng, crawl thư viện, xây RAG.
 - URL giả `https://ten-mien-thuc-te-cua-ban/mcp` trong hướng dẫn là ký hiệu minh họa, không phải host đang vận hành.
 
 ## Tài liệu tham khảo

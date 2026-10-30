@@ -4,7 +4,7 @@
 
 ## Đóng gói plugin từ GitHub
 
-Gói kỹ năng tạo tự động: `py scripts/build_cvnss_chatgpt_plugin.py` → `dist/cvnss4-knowledge-hub-0.1.0.zip`.
+Gói kỹ năng tạo tự động: `py scripts/build_cvnss_chatgpt_plugin.py` → `dist/cvnss4-knowledge-hub-0.2.0.zip`.
 
 Sau khi có một MCP URL HTTPS **thật và đã kiểm tra**:
 `py scripts/build_cvnss_chatgpt_plugin.py --mcp-url https://your-real-host/mcp`.
@@ -15,7 +15,7 @@ Mô hình đồng bộ code GitHub → host MCP → ChatGPT và hướng dẫn R
 
 ## Cách đồng bộ lâu dài với GitHub và Render
 
-Bản triển khai độc lập đã được bổ sung trong [render.yaml](../render.yaml) và [deploy/cvnss-mcp/Dockerfile](../deploy/cvnss-mcp/Dockerfile); xem [hướng dẫn GitHub → Render → ChatGPT](../deploy/cvnss-mcp/README.md). Bản này **công khai không đăng nhập và chỉ có sáu công cụ đọc**; khi đăng ký trong ChatGPT có thể chọn **No authentication** với điều kiện bạn đồng ý công khai dịch vụ và không gửi dữ liệu cá nhân. Không được sử dụng nó cho tài liệu học tập riêng, bộ nhớ L1–L3 hoặc thao tác ghi. Mọi dịch vụ private hoặc thao tác cá nhân hóa đều cần OAuth 2.1 / cơ chế xác thực phù hợp. `Host` allowlist và rate-limit không thay thế xác thực.
+Bản triển khai độc lập đã được bổ sung trong [render.yaml](../render.yaml) và [deploy/cvnss-mcp/Dockerfile](../deploy/cvnss-mcp/Dockerfile); xem [hướng dẫn GitHub → Render → ChatGPT](../deploy/cvnss-mcp/README.md). Bản này **công khai không đăng nhập và chỉ có bảy công cụ đọc**; khi đăng ký trong ChatGPT có thể chọn **No authentication** với điều kiện bạn đồng ý công khai dịch vụ và không gửi dữ liệu cá nhân. Không được sử dụng nó cho tài liệu học tập riêng, bộ nhớ L1–L3 hoặc thao tác ghi. Mọi dịch vụ private hoặc thao tác cá nhân hóa đều cần OAuth 2.1 / cơ chế xác thực phù hợp. `Host` allowlist và rate-limit không thay thế xác thực.
 
 Máy chủ đã được tạo trên Render bằng Web Service tích hợp GitHub và đã báo `Live`. Plugin cá nhân cũng đã được tạo; cần cài trong ChatGPT rồi kiểm thử lệnh MCP thực tế. Tài liệu Blueprint ở dưới là phương án triển khai mới, **không** được dùng để tạo dịch vụ trùng khi dịch vụ hiện tại đã tồn tại. Sau đó, khi CI của nhánh `main` hoàn tất thành công, Render có thể tự cập nhật phiên bản mã nguồn mà không cần thay URL plugin.
 
@@ -24,10 +24,10 @@ Máy chủ đã được tạo trên Render bằng Web Service tích hợp GitHu
 | Thành phần | Chức năng | Trạng thái |
 |---|---|---|
 | Converter v5.0.0-audit-safe | CQN ↔ CVN ↔ CVSS; xử lý nhập nhằng minh bạch | Đã có mã nguồn, kiểm thử oracle 23/23 |
-| MCP (`cvnss_hub/mcp_server.py`) | 6 read-only tools: convert, inspect, candidates, audit, self_test, sources | Cần chạy server |
-| DeepTutor REST (`/api/cvnss4/*`) | 7 endpoint; áp dụng chính sách `authenticated` của máy chủ DeepTutor | Có route qua manifest, cần khởi động DeepTutor |
+| MCP (`cvnss_hub/mcp_server.py`) | 7 read-only tools: convert, inspect, candidates, audit, self_test, sources, knowledge | Cần chạy server |
+| DeepTutor REST (`/api/cvnss4/*`) | 8 endpoint; áp dụng chính sách `authenticated` của máy chủ DeepTutor | Có route qua manifest, cần khởi động DeepTutor |
 | Knowledge registry (`sources.json`) | Danh mục URL, loại nguồn và trạng thái nhập dữ liệu | Danh mục ban đầu; **chưa crawl toàn bộ** |
-| RAG, L1/L2/L3, Quiz, Task Board | Chức năng đang có của DeepTutor | Chưa nối trực tiếp vào 6 công cụ MCP này |
+| RAG, L1/L2/L3, Quiz, Task Board | Chức năng đang có của DeepTutor | Chưa nối trực tiếp vào 7 công cụ MCP này |
 
 **Không đồng nhất REST API và MCP**: `/api/cvnss4/convert` không phải một MCP server. ChatGPT cần `https://ten-mien-thuc-te/mcp` hoặc Secure MCP Tunnel. `http://127.0.0.1:8000/mcp` chỉ dùng trong máy để thử nghiệm.
 
@@ -138,7 +138,7 @@ Quyền tạo custom MCP phụ thuộc gói thuê bao và chính sách workspace
 3. Trong **Connection**, nhập endpoint HTTPS MCP thật (kết thúc `/mcp`) **hoặc** chọn Secure MCP Tunnel đã cấu hình.
 4. Thiết lập xác thực của server, đọc cảnh báo rủi ro, xác nhận.
 5. Chọn **Create as a plugin**.
-6. Kiểm tra ChatGPT đã phát hiện đúng 6 công cụ; cài plugin, mở chat mới, gõ `@` chọn plugin rồi đặt câu hỏi.
+6. Kiểm tra ChatGPT đã phát hiện đúng 7 công cụ; cài plugin, mở chat mới, gõ `@` chọn plugin rồi đặt câu hỏi.
 7. Khi cập nhật danh mục công cụ, vào cấu hình plugin và **Refresh** để ChatGPT nạp lại schema.
 
 Ví dụ câu hỏi sau khi kết nối:
@@ -148,7 +148,7 @@ Ví dụ câu hỏi sau khi kết nối:
 - `@CVNSS4.0 Knowledge Hub Gọi cvnss_sources và cho biết tài liệu nào là nguồn gốc, tài liệu nào chưa nhập RAG.`
 - `@CVNSS4.0 Knowledge Hub Hãy chạy cvnss_self_test; cho biết số ca và lỗi (nếu có).`
 
-Các chức năng giảng dạy như `Hãy ra 20 câu hỏi từ toàn bộ tư liệu nguồn` **chưa** được 6 công cụ này cung cấp: cần kết nối tiếp DeepTutor Knowledge Base đã nạp dữ liệu và workflow quiz / mastery.
+Các chức năng giảng dạy như `Hãy ra 20 câu hỏi từ toàn bộ tư liệu nguồn` **chưa** được 7 công cụ này cung cấp: cần kết nối tiếp DeepTutor Knowledge Base đã nạp dữ liệu và workflow quiz / mastery.
 
 ## 6. Công cụ hiện có
 
@@ -160,12 +160,13 @@ Các chức năng giảng dạy như `Hãy ra 20 câu hỏi từ toàn bộ tư 
 | `cvnss_audit` | không | thông số audit |
 | `cvnss_self_test` | không | `ok, tests, failures` |
 | `cvnss_sources` | không | seed registry có URL và trạng thái |
+| `cvnss_knowledge` | `topic=all` hoặc ID chủ đề | khung tri thức, nguồn và nhãn kiểm chứng |
 
 Bộ CVNSS4.0 v5.0-audit-safe sử dụng bảng chuẩn, patch và quy tắc canonical minh bạch. Ví dụ mã `ed` có các ứng viên `ề` và `oet`, chọn `ề` theo chính sách canonical: vì thế không hứa giải mã khôi phục nguyên văn với mọi chuỗi đầu vào.
 
 ## 7. REST API tích hợp DeepTutor (không phải MCP)
 
-Khi chạy ứng dụng DeepTutor server (có cài module server) theo hướng dẫn gốc và xác thực người dùng, FastAPI có route `/api/cvnss4/health`, `/convert`, `/inspect`, `/candidates`, `/sources`, `/audit`, `/self-test` từ core manifest với chính sách **authenticated**. Kiểm tra OpenAPI schema trên máy chủ sau khi khởi động. REST endpoint không được dùng thay `/mcp` trong ô tùy chỉnh MCP ChatGPT.
+Khi chạy ứng dụng DeepTutor server (có cài module server) theo hướng dẫn gốc và xác thực người dùng, FastAPI có route `/api/cvnss4/health`, `/convert`, `/inspect`, `/candidates`, `/sources`, `/audit`, `/self-test`, `/knowledge` từ core manifest với chính sách **authenticated**. Kiểm tra OpenAPI schema trên máy chủ sau khi khởi động. REST endpoint không được dùng thay `/mcp` trong ô tùy chỉnh MCP ChatGPT.
 
 ## 8. Chẩn đoán
 

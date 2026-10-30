@@ -10,7 +10,7 @@ from .service import execute
 
 
 def make_mcp(*, host: str = "127.0.0.1", port: int = 8000, public_host: str | None = None):
-    """Build one six-tool MCP server shared by local and hosted transports.
+    """Build the read-only MCP server shared by local and hosted transports.
 
     A public hostname adds a Host allowlist entry; it does NOT provide OAuth.
     The hosted deployment is intentionally anonymous and read-only.
@@ -79,6 +79,16 @@ def make_mcp(*, host: str = "127.0.0.1", port: int = 8000, public_host: str | No
     def cvnss_sources() -> dict:
         """List curated sources; this is a URL registry, not an ingested RAG corpus."""
         return execute("sources")
+
+    @mcp.tool()
+    def cvnss_knowledge(topic: str = "all") -> dict:
+        """Read the draft standardization registry, not official rules or full-text RAG.
+
+        Topics: all, history, concepts, nature, characteristics, functions,
+        rules, formulas, value, applications, limitations. Preserve evidence_type,
+        review_status and source_refs when explaining records.
+        """
+        return execute("knowledge", text=topic)
 
     return mcp
 

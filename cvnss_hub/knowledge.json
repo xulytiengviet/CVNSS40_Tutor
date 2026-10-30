@@ -1,0 +1,229 @@
+{
+  "schema": "cvnss4-knowledge/v1",
+  "version": "0.1.0",
+  "status": "draft",
+  "notice": "Khung chuẩn hóa đề xuất; chưa phải đặc tả chính thức hoặc tiêu chuẩn quốc gia. Nguồn sơ cấp mới được liên kết, chưa nhập toàn văn. Không dùng bản nháp làm bằng chứng quy tắc.",
+  "topics": [
+    {
+      "id": "history",
+      "title": "Khởi đầu và lịch sử"
+    },
+    {
+      "id": "concepts",
+      "title": "Khái niệm"
+    },
+    {
+      "id": "nature",
+      "title": "Bản chất và phạm vi"
+    },
+    {
+      "id": "characteristics",
+      "title": "Đặc điểm"
+    },
+    {
+      "id": "functions",
+      "title": "Chức năng"
+    },
+    {
+      "id": "rules",
+      "title": "Quy tắc"
+    },
+    {
+      "id": "formulas",
+      "title": "Công thức"
+    },
+    {
+      "id": "value",
+      "title": "Giá trị"
+    },
+    {
+      "id": "applications",
+      "title": "Ứng dụng"
+    },
+    {
+      "id": "limitations",
+      "title": "Giới hạn và mơ hồ"
+    }
+  ],
+  "records": [
+    {
+      "id": "history-scope",
+      "topic": "history",
+      "title": "Khởi đầu và lịch sử",
+      "statement": "Đối chiếu tác giả, mục tiêu ban đầu, mốc thời gian và thay đổi giữa các phiên bản.",
+      "evidence_type": "proposal",
+      "review_status": "draft",
+      "source_refs": [],
+      "source_locator": null,
+      "exact_quote": null,
+      "reviewer": null,
+      "reviewed_at": null,
+      "examples": [],
+      "test_ids": []
+    },
+    {
+      "id": "concepts-scope",
+      "topic": "concepts",
+      "title": "Khái niệm",
+      "statement": "Xây từ điển CVNSS4.0, CQN, CVN, CVSS theo định nghĩa có dẫn nguồn; không tự suy diễn tên đầy đủ.",
+      "evidence_type": "proposal",
+      "review_status": "draft",
+      "source_refs": [],
+      "source_locator": null,
+      "exact_quote": null,
+      "reviewer": null,
+      "reviewed_at": null,
+      "examples": [],
+      "test_ids": []
+    },
+    {
+      "id": "nature-scope",
+      "topic": "nature",
+      "title": "Bản chất và phạm vi",
+      "statement": "Làm rõ đối tượng biểu diễn và quan hệ với chữ Quốc ngữ trên tài liệu gốc; phân biệt mô tả của tác giả và phân tích kỹ thuật.",
+      "evidence_type": "proposal",
+      "review_status": "draft",
+      "source_refs": [],
+      "source_locator": null,
+      "exact_quote": null,
+      "reviewer": null,
+      "reviewed_at": null,
+      "examples": [],
+      "test_ids": []
+    },
+    {
+      "id": "characteristics-scope",
+      "topic": "characteristics",
+      "title": "Đặc điểm",
+      "statement": "Đặc tả tập ký hiệu, Unicode, chữ hoa/thường, dấu, cấu trúc âm tiết và bảo toàn định dạng bằng quy tắc và kiểm thử.",
+      "evidence_type": "proposal",
+      "review_status": "draft",
+      "source_refs": [],
+      "source_locator": null,
+      "exact_quote": null,
+      "reviewer": null,
+      "reviewed_at": null,
+      "examples": [],
+      "test_ids": []
+    },
+    {
+      "id": "functions-scope",
+      "topic": "functions",
+      "title": "Chức năng",
+      "statement": "Mô tả hợp đồng đầu vào/đầu ra cho viết, đọc, chuyển đổi, tra cứu, giải thích và luyện tập.",
+      "evidence_type": "proposal",
+      "review_status": "draft",
+      "source_refs": [],
+      "source_locator": null,
+      "exact_quote": null,
+      "reviewer": null,
+      "reviewed_at": null,
+      "examples": [],
+      "test_ids": []
+    },
+    {
+      "id": "rules-scope",
+      "topic": "rules",
+      "title": "Quy tắc",
+      "statement": "Mỗi quy tắc cần chiều chuyển đổi, điều kiện, thứ tự ưu tiên, ngoại lệ, xung đột và dẫn chứng.",
+      "evidence_type": "proposal",
+      "review_status": "draft",
+      "source_refs": [],
+      "source_locator": null,
+      "exact_quote": null,
+      "reviewer": null,
+      "reviewed_at": null,
+      "examples": [],
+      "test_ids": []
+    },
+    {
+      "id": "formulas-scope",
+      "topic": "formulas",
+      "title": "Công thức",
+      "statement": "Đối chiếu công thức theo phiên bản nguồn; gắn từng công thức với mã quy tắc và vector kiểm thử, không tự tạo công thức.",
+      "evidence_type": "proposal",
+      "review_status": "draft",
+      "source_refs": [],
+      "source_locator": null,
+      "exact_quote": null,
+      "reviewer": null,
+      "reviewed_at": null,
+      "examples": [],
+      "test_ids": []
+    },
+    {
+      "id": "value-scope",
+      "topic": "value",
+      "title": "Giá trị",
+      "statement": "Đo độ gọn, tốc độ đọc/gõ, độ hiểu và ghi nhớ trên tập đánh giá có đối chứng; nêu đơn vị đếm và giới hạn.",
+      "evidence_type": "proposal",
+      "review_status": "draft",
+      "source_refs": [],
+      "source_locator": null,
+      "exact_quote": null,
+      "reviewer": null,
+      "reviewed_at": null,
+      "examples": [],
+      "test_ids": []
+    },
+    {
+      "id": "applications-scope",
+      "topic": "applications",
+      "title": "Ứng dụng",
+      "statement": "Thí điểm công cụ học, giáo án, bàn phím, API và tài liệu song song với tiêu chí riêng cho từng nhóm người dùng.",
+      "evidence_type": "proposal",
+      "review_status": "draft",
+      "source_refs": [],
+      "source_locator": null,
+      "exact_quote": null,
+      "reviewer": null,
+      "reviewed_at": null,
+      "examples": [],
+      "test_ids": []
+    },
+    {
+      "id": "limitations-scope",
+      "topic": "limitations",
+      "title": "Giới hạn và mơ hồ",
+      "statement": "Công bố trường hợp mất thông tin, tên riêng, từ vay mượn và phạm vi chưa hỗ trợ; không hứa chuyển đổi luôn đảo ngược được.",
+      "evidence_type": "proposal",
+      "review_status": "draft",
+      "source_refs": [],
+      "source_locator": null,
+      "exact_quote": null,
+      "reviewer": null,
+      "reviewed_at": null,
+      "examples": [],
+      "test_ids": []
+    },
+    {
+      "id": "reverse-ed",
+      "topic": "limitations",
+      "title": "Mã ed có nhiều ứng viên",
+      "statement": "Trong bộ chuyển đổi 5.0.0-audit-safe, ed có ứng viên ề và oet; chính sách mặc định chọn ề. Đây là chính sách thực thi, không chứng minh ý định ban đầu của người viết.",
+      "evidence_type": "implementation",
+      "review_status": "needs_review",
+      "source_refs": [
+        "converter"
+      ],
+      "source_locator": "tests/test_cvnss_hub.py::test_ambiguity_surface",
+      "exact_quote": null,
+      "reviewer": null,
+      "reviewed_at": null,
+      "examples": [
+        {
+          "input": "ed",
+          "source": "cvss",
+          "candidates": [
+            "ề",
+            "oet"
+          ],
+          "selected": "ề"
+        }
+      ],
+      "test_ids": [
+        "tests/test_cvnss_hub.py::test_ambiguity_surface"
+      ]
+    }
+  ]
+}

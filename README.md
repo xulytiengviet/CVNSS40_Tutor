@@ -1,3 +1,5 @@
+> **Sổ tay CVNSS4.0:** [Hướng dẫn Plugin · MCP · API](https://xulytiengviet.github.io/CVNSS40_Tutor/) · [Mã trang và cách xuất bản](docs-for-dev/site/README.md). Trang tài liệu tĩnh, tách biệt với máy chủ MCP/REST.
+
 <div align="center">
 > **Triển khai tự động GitHub → Render → ChatGPT:** [Hướng dẫn từng bước](deploy/cvnss-mcp/README.md) · [Render Blueprint](render.yaml) · [Dockerfile MCP](deploy/cvnss-mcp/Dockerfile). Máy chủ chưa được tạo tự động chỉ bằng commit GitHub; phải kết nối Render và cài plugin trong ChatGPT một lần.
 

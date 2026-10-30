@@ -1,5 +1,6 @@
 """Hosted MCP safety regression tests; no network requests or credentials."""
 import importlib
+import json
 import sys
 
 import pytest
@@ -40,7 +41,7 @@ def test_hosted_readonly_opt_in(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_six_mcp_tools_are_discoverable():
+async def test_mcp_tools_are_discoverable():
     from cvnss_hub.mcp_server import make_mcp
 
     mcp = make_mcp()
@@ -52,4 +53,21 @@ async def test_six_mcp_tools_are_discoverable():
         "cvnss_audit",
         "cvnss_self_test",
         "cvnss_sources",
+        "cvnss_knowledge",
     }
+
+
+@pytest.mark.asyncio
+async def test_knowledge_mcp_preserves_draft_and_rejects_unknown_topic():
+    from cvnss_hub.mcp_server import make_mcp
+
+    mcp = make_mcp()
+    from mcp.server.fastmcp.exceptions import ToolError
+
+    content = await mcp.call_tool("cvnss_knowledge", {"topic": "history"})
+    data = json.loads(content[0].text)
+    assert data["status"] == "draft"
+    assert {item["topic"] for item in data["records"]} == {"history"}
+    assert data["records"][0]["evidence_type"] == "proposal"
+    with pytest.raises(ToolError, match="Unknown knowledge topic"):
+        await mcp.call_tool("cvnss_knowledge", {"topic": "missing"})

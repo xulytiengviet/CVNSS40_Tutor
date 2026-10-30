@@ -4,7 +4,7 @@ from zipfile import ZipFile
 
 import pytest
 
-from scripts.build_cvnss_chatgpt_plugin import make_archive, validate_endpoint
+from scripts.build_cvnss_chatgpt_plugin import ROOT, make_archive, validate_endpoint
 
 
 @pytest.mark.parametrize("bad", [
@@ -30,6 +30,15 @@ def test_skill_only_package(tmp_path):
         assert "cvnss4-knowledge-hub/mcp.json" not in names
         manifest = json.loads(archive.read("cvnss4-knowledge-hub/plugin.json"))
         assert manifest["name"] == "cvnss4-knowledge-hub"
+        assert manifest["version"] == "0.2.0"
+        # Offline references must be the same canonical assets served by the API.
+        for source, bundled in (
+            ("knowledge.json", "knowledge.json"),
+            ("knowledge.schema.json", "knowledge.schema.json"),
+            ("STANDARDIZATION.md", "standardization.md"),
+        ):
+            name = "cvnss4-knowledge-hub/skills/cvnss4-tutor/references/" + bundled
+            assert archive.read(name) == (ROOT / "cvnss_hub" / source).read_bytes()
 
 
 def test_remote_package_and_reproducibility(tmp_path):

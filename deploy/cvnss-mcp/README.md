@@ -9,7 +9,7 @@ Mục tiêu: GitHub là **nguồn mã duy nhất**; Render triển khai MCP khi 
 ```text
 GitHub xulytiengviet/CVNSS40_Tutor (main)
    ├── cvnss_hub/oracle/cvnss-converter.js    # Rule Oracle 5.0 audit-safe
-   ├── cvnss_hub/mcp_server.py                 # 6 read-only MCP tools
+   ├── cvnss_hub/mcp_server.py                 # 7 read-only MCP tools
    ├── cvnss_hub/hosted.py                     # ASGI + /healthz + rate-limiter
    ├── deploy/cvnss-mcp/Dockerfile             # Python + Node, standalone MCP
    ├── render.yaml                             # Render Blueprint, checksPass
@@ -46,7 +46,7 @@ GitHub xulytiengviet/CVNSS40_Tutor (main)
 
 1. Trong ChatGPT web, vào **Plugins → + → Add custom MCP server**.
 2. Nhập tên `CVNSS4.0 Knowledge Hub`, và endpoint URL **thật** `https://<your-service>.onrender.com/mcp`.
-3. Chọn **No authentication**, **chỉ đối với bản 6 công cụ công khai chỉ đọc**. Bản này không cung cấp tài khoản người dùng/ghi dữ liệu. Nếu triển khai phiên bản dùng bộ nhớ riêng, phải đổi sang OAuth và review lại quyền.
+3. Chọn **No authentication**, **chỉ đối với bản 7 công cụ công khai chỉ đọc**. Bản này không cung cấp tài khoản người dùng/ghi dữ liệu. Nếu triển khai phiên bản dùng bộ nhớ riêng, phải đổi sang OAuth và review lại quyền.
 4. Đọc rủi ro, bấm xác nhận và **Create as a plugin**. Kiểm tra danh sách công cụ `cvnss_convert`, `cvnss_inspect`, `cvnss_candidates`, `cvnss_audit`, `cvnss_self_test`, `cvnss_sources`.
 5. Cài plugin vào tài khoản/workspace nếu được cấp quyền. Trong chat gõ `@CVNSS4.0 Knowledge Hub` và hỏi: `Hãy gọi cvnss_convert với text="Tiếng Việt", mode="cqn"`.
 

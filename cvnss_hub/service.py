@@ -8,8 +8,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 BRIDGE = ROOT / "oracle" / "bridge.cjs"
 SOURCES = ROOT / "sources.json"
+KNOWLEDGE = ROOT / "knowledge.json"
 MAX_TEXT = 100_000
-OPERATIONS = {"convert", "inspect", "candidates", "audit", "self_test", "sources"}
+OPERATIONS = {"convert", "inspect", "candidates", "audit", "self_test", "sources", "knowledge"}
 
 
 def execute(operation: str, *, text: str = "", mode: str = "cqn", source: str = "cvss") -> dict:
@@ -25,6 +26,16 @@ def execute(operation: str, *, text: str = "", mode: str = "cqn", source: str = 
     if operation == "sources":
         # This is a seed registry of source links, NOT a scraped/ingested corpus.
         return json.loads(SOURCES.read_text(encoding="utf-8"))
+    if operation == "knowledge":
+        # A curated draft, not an ingested corpus or an official specification.
+        result = json.loads(KNOWLEDGE.read_text(encoding="utf-8"))
+        topic = text or "all"
+        if topic != "all":
+            if topic not in {item["id"] for item in result["topics"]}:
+                raise ValueError("Unknown knowledge topic")
+            result["topics"] = [item for item in result["topics"] if item["id"] == topic]
+            result["records"] = [item for item in result["records"] if item["topic"] == topic]
+        return result
     try:
         proc = subprocess.run(
             ["node", str(BRIDGE)],

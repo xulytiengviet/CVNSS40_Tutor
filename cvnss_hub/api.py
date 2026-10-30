@@ -56,6 +56,12 @@ def audit():
     return run_safely("audit")
 
 
+@router.get("/knowledge")
+def knowledge(topic: str = "all"):
+    """Read draft knowledge with evidence labels; topic is a registry ID."""
+    return run_safely("knowledge", text=topic)
+
+
 @router.get("/self-test")
 def self_test():
     return run_safely("self_test")

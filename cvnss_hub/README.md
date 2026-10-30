@@ -26,7 +26,27 @@ Use `inspect` and `candidates` whenever the decode is ambiguous.
 
 Không có endpoint HTTPS/MCP công khai được triển khai. Người dùng cần tự chạy server và kết nối theo quyền tài khoản/workspace.
 
-## Usage
+## Knowledge standardization (draft)
+
+The source-controlled [proposal](STANDARDIZATION.md), [knowledge registry](knowledge.json)
+and [JSON Schema](knowledge.schema.json) cover history, concepts, nature,
+characteristics, functions, rules, formulas, value, applications and limitations.
+The registry is an editorial starting point, **not an author-approved specification**.
+Source links remain un-ingested; a proposal must not be cited as an original rule.
+Evidence types and review states are separate. Approval requires source references,
+a locator, reviewer and review date; approved primary-source claims also require
+an exact quote. Schema validation checks structure, not factual truth; a human
+must verify the quotation, source authority and rights to reuse it.
+
+Read the full registry with `execute("knowledge")`, REST
+`GET /api/cvnss4/knowledge`, or MCP `cvnss_knowledge(topic="all")`.
+Filter with a topic ID, for example `limitations`; an unknown ID returns a
+validation error (REST 422). No network fetch or source ingestion occurs.
+The host's existing authentication policy applies to REST; local/hosted MCP keeps
+its existing read-only transport policy. The plugin builder bundles the same
+canonical knowledge and proposal files as offline skill references.
+
+## Oracle usage
 Run from project root with Node.js and Python installed:
 
 ```bash
@@ -64,7 +84,7 @@ For the **DeepTutor host**, the core module manifest now mounts these REST route
 Configure a stdio server with `command: python` and
 `args: ["-m", "cvnss_hub.mcp_server"]`, from this repository root.
 Tools: cvnss_convert, cvnss_inspect, cvnss_candidates,
-cvnss_audit, cvnss_self_test, cvnss_sources. No API keys needed for deterministic conversion.
+cvnss_audit, cvnss_self_test, cvnss_sources, cvnss_knowledge. No API keys needed for deterministic conversion.
 This does **not** claim MCP remote deployment or a public URL.
 
 ## Knowledge, pedagogy and provenance plan

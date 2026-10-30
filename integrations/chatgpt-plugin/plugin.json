@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "cvnss4-knowledge-hub",
-  "version": "0.1.0",
-  "description": "Source-aware CVNSS4.0 learning workflows. MCP conversion tools require a separately connected, running CVNSS4.0 Hub server.",
+  "version": "0.2.0",
+  "description": "Source-aware CVNSS4.0 learning and knowledge standardization with evidence labels. Exact conversion requires a connected Oracle MCP.",
   "author": {
     "name": "CVNSS40_Tutor contributors"
   },
@@ -10,13 +10,13 @@
     "com.openai": {
       "interface": {
         "displayName": "CVNSS4.0 Knowledge Hub",
-        "shortDescription": "Học và chuyển đổi CVNSS4.0",
-        "longDescription": "Hướng dẫn học và kiểm toán CVNSS4.0, gọi MCP Oracle khi được kết nối. Công cụ MCP hoạt động độc lập với bộ kỹ năng; cần triển khai server riêng.",
+        "shortDescription": "Học, tra cứu và chuẩn hóa CVNSS4.0",
+        "longDescription": "Học, chuyển đổi và chuẩn hóa tri thức CVNSS4.0 theo nguồn, trạng thái kiểm chứng và giới hạn mơ hồ. Có khung tri thức nháp đi kèm; công cụ MCP cần máy chủ được kết nối riêng.",
         "developerName": "CVNSS40_Tutor contributors",
         "capabilities": [
           "Interactive"
         ],
-        "defaultPrompt": "Giải thích quy tắc CVNSS4.0 và kiểm tra chuyển đổi bằng CVNSS4.0 Oracle nếu đã kết nối MCP."
+        "defaultPrompt": "Tra cứu CVNSS4.0 theo khái niệm, lịch sử, bản chất, đặc điểm, chức năng, quy tắc, công thức, giá trị và ứng dụng. Gọi cvnss_knowledge nếu có, phân biệt nguồn gốc, chính sách thực thi và đề xuất; chuyển đổi chính xác bằng Oracle."
       }
     }
   }

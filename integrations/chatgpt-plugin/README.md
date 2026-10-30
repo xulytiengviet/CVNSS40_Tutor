@@ -2,6 +2,19 @@
 
 # ChatGPT companion skill for CVNSS4.0 Knowledge Hub
 
+## Source update 0.2.0
+
+Version 0.2.0 adds ten knowledge topics, evidence/review labels and guidance for
+learners, teachers, developers and researchers. Built ZIPs include offline
+`references/knowledge.json`, `knowledge.schema.json` and `standardization.md`
+inside the skill, copied from canonical files in `cvnss_hub/`.
+Connected servers from this source also expose `cvnss_knowledge`; older servers
+may not. These are draft editorial materials, not a completed official standard.
+Building this version does not update the separately installed ChatGPT plugin or
+deploy a new Render server. Update the existing plugin binding/package rather
+than creating duplicate servers. The operational note above describes the earlier
+0.1.0 installation, not deployment of this source update.
+
 This folder is an **optional skills-only plugin source package** following Agent Plugins 1.0. The companion skill teaches an AI when to use the CVNSS4.0 Oracle and how to handle ambiguity, provenance, quizzes and training. It **does not create or host an MCP server** and does not by itself make the converter callable from ChatGPT.
 
 To use live tools in ChatGPT:
@@ -15,7 +28,7 @@ The repository intentionally omits a hardcoded `mcp.json`: run the builder with 
 ## Reproducible ZIP package
 
 From repository root on Windows, run `py scripts/build_cvnss_chatgpt_plugin.py`.
-It creates `dist/cvnss4-knowledge-hub-0.1.0.zip` (skills-only). The focused GitHub Actions workflow uploads this same ZIP as a build artifact.
+It creates `dist/cvnss4-knowledge-hub-0.2.0.zip` (skills-only). The focused GitHub Actions workflow uploads this same ZIP as a build artifact.
 
 After deploying **and testing** an authenticated HTTPS MCP server, run
 `py scripts/build_cvnss_chatgpt_plugin.py --mcp-url https://cvnss40-mcp.onrender.com/mcp`

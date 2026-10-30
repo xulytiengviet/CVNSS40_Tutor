@@ -71,6 +71,16 @@ def make_archive(*, mcp_url: str | None = None, out: Path | None = None) -> Path
                 raise ValueError("SKILL.md must contain YAML frontmatter")
         package[prefix + file.relative_to(SOURCE).as_posix()] = content
 
+    # Bundle the canonical registry and proposal without maintaining duplicate data.
+    for source_name, target_name in (
+        ("knowledge.json", "knowledge.json"),
+        ("knowledge.schema.json", "knowledge.schema.json"),
+        ("STANDARDIZATION.md", "standardization.md"),
+    ):
+        package[prefix + "skills/cvnss4-tutor/references/" + target_name] = (
+            ROOT / "cvnss_hub" / source_name
+        ).read_bytes()
+
     if mcp_url:
         remote_url = validate_endpoint(mcp_url)
         mcp = {
