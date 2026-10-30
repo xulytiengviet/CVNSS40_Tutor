@@ -6,6 +6,9 @@ on:
       - 'cvnss_hub/**'
       - 'tests/test_cvnss_hub.py'
       - 'tests/test_cvnss_plugin_package.py'
+      - 'tests/test_cvnss_hosted.py'
+      - 'deploy/cvnss-mcp/**'
+      - 'render.yaml'
       - 'scripts/build_cvnss_chatgpt_plugin.py'
       - 'integrations/chatgpt-plugin/**'
       - 'pyproject.toml'
@@ -37,7 +40,7 @@ jobs:
       - name: Compile source and run focused tests
         run: |
           python -m compileall -q cvnss_hub
-          python -m pytest -q --noconftest tests/test_cvnss_hub.py tests/test_cvnss_plugin_package.py
+          python -m pytest -q --noconftest tests/test_cvnss_hub.py tests/test_cvnss_plugin_package.py tests/test_cvnss_hosted.py
       - name: Build skills-only plugin archive (not a live MCP connection)
         run: |
           python scripts/build_cvnss_chatgpt_plugin.py
