@@ -77,7 +77,8 @@ Nếu chọn Render, tích hợp GitHub có thể tự tái triển khai khi com
 3. Dán URL MCP HTTPS thật hoặc chọn Secure MCP Tunnel được cấu hình.
 4. Chọn xác thực phù hợp (OAuth nếu ứng dụng lưu thông tin cá nhân/tài khoản), xem xét cảnh báo bảo mật.
 5. Bấm **Create as a plugin**, duyệt các tool được phát hiện, cài plugin.
-6. Trong hội thoại mới, gõ `@CVNSS4.0 Knowledge Hub`, yêu cầu gọi `cvnss_convert` hoặc `cvnss_sources`.
+6. Nếu muốn đóng gói thêm kỹ năng `SKILL.md` vào **chính plugin MCP vừa tạo**, lấy ID kỹ thuật `plugin_asdk_app_...` từ URL trang plugin rồi chuyển ID và thư mục `integrations/chatgpt-plugin` cho `@plugin-creator` để **cập nhật plugin hiện có**, không tạo một plugin MCP trùng lặp. Giữ nguyên liên kết server và auth.
+7. Trong hội thoại mới, gõ `@CVNSS4.0 Knowledge Hub`, yêu cầu gọi `cvnss_convert` hoặc `cvnss_sources`.
 
 **Lưu ý gói:** quy trình tạo custom MCP và quyền tool thay đổi theo gói và chính sách workspace. Xem Help Center hiện hành. Tính năng MCP đầy đủ trên web không đương nhiên khả dụng với mọi gói cá nhân.
 
@@ -100,7 +101,7 @@ Nếu chọn Render, tích hợp GitHub có thể tự tái triển khai khi com
 
 ## Tài liệu tham khảo
 - [OpenAI: Connect and test your plugin](https://developers.openai.com/plugins/deploy/connect-chatgpt)
-- [OpenAI: Package your plugin](https://developers.openai.com/plugins/build/plugins)
+- [OpenAI: Package your plugin (reuse existing MCP app ID)](https://developers.openai.com/plugins/build/plugins)
 - [OpenAI: Connecting custom MCP servers](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt)
 - [Render: Automatic Git deploys](https://render.com/docs/deploys)
 - [Render: Connect GitHub](https://render.com/docs/git-provider)
