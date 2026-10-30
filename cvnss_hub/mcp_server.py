@@ -1,9 +1,16 @@
-"""Run with: python -m cvnss_hub.mcp_server (requires pip install mcp)."""
+"""CVNSS4.0 MCP server. Default: stdio; --http: Streamable HTTP for tunnelling."""
+import argparse
+import os
 from .service import execute
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="CVNSS4.0 MCP service")
+    parser.add_argument("--http", action="store_true", help="Run Streamable HTTP at /mcp")
+    parser.add_argument("--host", default=os.getenv("CVNSS_MCP_HOST", "127.0.0.1"))
+    parser.add_argument("--port", type=int, default=int(os.getenv("CVNSS_MCP_PORT", "8000")))
+    args = parser.parse_args()
     from mcp.server.fastmcp import FastMCP
-    mcp = FastMCP("CVNSS4.0 Knowledge Hub")
+    mcp = FastMCP("CVNSS4.0 Knowledge Hub", host=args.host, port=args.port)
 
     @mcp.tool()
     def cvnss_convert(text: str, mode: str = "cqn") -> dict:
@@ -30,7 +37,7 @@ def main() -> None:
         """Run built-in deterministic converter checks."""
         return execute("self_test")
 
-    mcp.run(transport="stdio")
+    mcp.run(transport="streamable-http" if args.http else "stdio")
 
 if __name__ == "__main__":
     main()
