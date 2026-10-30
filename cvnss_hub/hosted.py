@@ -82,18 +82,35 @@ def create_hosted_app():
             )(scope, receive, send)
             return
 
-        # MCP SDK also applies its own request limits; cap chunked uploads here.
-        total = 0
-        async def limited_receive():
-            nonlocal total
-            message = await receive()
-            if message["type"] == "http.request":
-                total += len(message.get("body", b""))
-                if total > 262144:
-                    raise ValueError("MCP request body exceeds 256 KiB")
-            return message
+        # Cap even chunked uploads, returning a bounded HTTP response rather
+        # than raising inside the SDK's asynchronous request handler.
+        if scope.get("method") == "POST":
+            buffer = bytearray()
+            while True:
+                message = await receive()
+                if message["type"] != "http.request":
+                    return
+                buffer.extend(message.get("body", b""))
+                if len(buffer) > 262144:
+                    await JSONResponse(
+                        {"detail": "Request too large"}, status_code=413
+                    )(scope, receive, send)
+                    return
+                if not message.get("more_body", False):
+                    break
 
-        await inner(scope, limited_receive, send)
+            first = True
+
+            async def replay_receive():
+                nonlocal first
+                if first:
+                    first = False
+                    return {"type": "http.request", "body": bytes(buffer), "more_body": False}
+                return await receive()
+
+            await inner(scope, replay_receive, send)
+        else:
+            await inner(scope, receive, send)
 
     return app
 
