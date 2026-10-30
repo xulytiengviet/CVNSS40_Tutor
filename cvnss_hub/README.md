@@ -16,6 +16,10 @@ These are code audit counts, **not accuracy percentages**.
 The reverse converter can be lossy because of many-to-one mappings.
 Use `inspect` and `candidates` whenever the decode is ambiguous.
 
+## Đồng bộ GitHub → MCP hosting → ChatGPT
+
+Đã có [Dockerfile riêng](../deploy/cvnss-mcp/Dockerfile) và [Render Blueprint](../render.yaml) cho auto-deploy sau khi CI pass, cùng [hướng dẫn cấu hình lần đầu](../deploy/cvnss-mcp/README.md). Dịch vụ này **công khai chỉ đọc** và không có OAuth/hồ sơ học viên; tuyệt đối không dùng cho dữ liệu riêng tư. Không có URL triển khai thật cho đến khi chủ sở hữu liên kết Render với GitHub và tạo service.
+
 ## Hướng dẫn sử dụng qua ChatGPT
 
 **[Xem hướng dẫn Windows, MCP Inspector, HTTPS/Secure MCP Tunnel và plugin ChatGPT](CHATGPT_PLUGIN.md).**
