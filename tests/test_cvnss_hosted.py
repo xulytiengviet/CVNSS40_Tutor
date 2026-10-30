@@ -37,3 +37,19 @@ def test_hosted_readonly_opt_in(monkeypatch):
         assert ready.status_code == 200
         assert ready.json()["auth"] == "anonymous-read-only"
         assert client.get("/missing").status_code == 404
+
+
+@pytest.mark.asyncio
+async def test_six_mcp_tools_are_discoverable():
+    from cvnss_hub.mcp_server import make_mcp
+
+    mcp = make_mcp()
+    tools = await mcp.list_tools()
+    assert {tool.name for tool in tools} == {
+        "cvnss_convert",
+        "cvnss_inspect",
+        "cvnss_candidates",
+        "cvnss_audit",
+        "cvnss_self_test",
+        "cvnss_sources",
+    }
