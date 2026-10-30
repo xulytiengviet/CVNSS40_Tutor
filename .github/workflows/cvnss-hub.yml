@@ -34,7 +34,7 @@ jobs:
       - name: Compile source and run focused tests
         run: |
           python -m compileall -q cvnss_hub
-          python -m pytest -q tests/test_cvnss_hub.py
+          python -m pytest -q --noconftest tests/test_cvnss_hub.py
       - name: Build core Python wheel
         run: python -m build --wheel --no-isolation
       - name: Verify packaged oracle and source registry
