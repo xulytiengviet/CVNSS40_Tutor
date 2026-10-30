@@ -9,3 +9,15 @@ To use live tools in ChatGPT:
 4. When packaging this companion skill with the existing MCP plugin, retain its verified server binding. Do not invent an `mcp.json` URL, and do not re-register a second duplicate server.
 
 This directory intentionally omits `mcp.json` until a real endpoint has been deployed. It is a reusable instruction layer, not proof of a working cloud connection.
+
+## Reproducible ZIP package
+
+From repository root on Windows, run `py scripts/build_cvnss_chatgpt_plugin.py`.
+It creates `dist/cvnss4-knowledge-hub-0.1.0.zip` (skills-only). The focused GitHub Actions workflow uploads this same ZIP as a build artifact.
+
+After deploying **and testing** an authenticated HTTPS MCP server, run
+`py scripts/build_cvnss_chatgpt_plugin.py --mcp-url https://YOUR-REAL-HOST/mcp`
+to include a portable `mcp.json` pointing at that URL.
+
+For GitHub auto-deploy, ChatGPT metadata refreshing and differences between code,
+RAG and memory sync, see [GITHUB_SYNC.md](GITHUB_SYNC.md).
