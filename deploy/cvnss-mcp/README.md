@@ -2,7 +2,7 @@
 
 Mục tiêu: GitHub là **nguồn mã duy nhất**; Render triển khai MCP khi CI của nhánh liên kết đạt; ChatGPT gọi công cụ qua **một URL HTTPS ổn định**, không phải cài lại plugin mỗi lần thay đổi thuật toán.
 
-**Tình trạng:** Mã nguồn Docker, Render Blueprint và MCP ASGI đã có trong repo. Không có Render service, domain, GitHub deployment integration hay ChatGPT plugin nào được tạo hộ trong quá trình commit mã nguồn. Bước gắn tài khoản GitHub với Render và cấp quyền ChatGPT cần chính chủ hoàn tất.
+> **Trạng thái vận hành 30/10/2026:** Render đã báo `Live` cho dịch vụ [cvnss40-mcp](https://dashboard.render.com/web/srv-dbi1sj1srm7s73d0tnb0) tại `https://cvnss40-mcp.onrender.com/mcp`. Plugin cá nhân CVNSS4.0 Knowledge Hub v0.1.0 đã được **tạo riêng trong ChatGPT** và có `mcp.json` trỏ đến URL đó. Cần **cài plugin/cho phép sử dụng** trong giao diện ChatGPT và chạy thử một lệnh `cvnss_convert` mới xác nhận được kết nối đầu cuối. Render đang tự triển khai theo `commit`, chưa phải `checksPass`. Gói MCP công khai chỉ đọc, không OAuth, không đồng bộ hồ sơ riêng/RAG.
 
 ## 1. Thành phần hệ thống
 
@@ -29,7 +29,7 @@ GitHub xulytiengviet/CVNSS40_Tutor (main)
 
 ## 2. Triển khai Render Blueprint (thao tác một lần)
 
-1. Hợp nhất PR CVNSS4.0 vào `main` **sau khi CI xanh**.
+1. PR #1 đã được hợp nhất vào `main`. **Nếu dùng Web Service đã tạo, bỏ qua toàn bộ bước tạo Blueprint mới bên dưới** để tránh tạo dịch vụ trùng.
 2. Vào [Render Dashboard](https://dashboard.render.com/) và đăng nhập; liên kết GitHub trong **Account Settings → Connected Accounts**. Cấp quyền cho repository `xulytiengviet/CVNSS40_Tutor`.
 3. Vào **Blueprints → New Blueprint Instance**; chọn repository trên. Render phát hiện file `render.yaml` ở root.
 4. Đặt tên Blueprint tùy chọn, kiểm tra dịch vụ `cvnss40-mcp` chạy Docker, branch `main`, `healthCheckPath: /healthz`, `autoDeployTrigger: checksPass`.
