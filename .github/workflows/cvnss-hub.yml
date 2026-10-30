@@ -5,6 +5,9 @@ on:
     paths:
       - 'cvnss_hub/**'
       - 'tests/test_cvnss_hub.py'
+      - 'tests/test_cvnss_plugin_package.py'
+      - 'scripts/build_cvnss_chatgpt_plugin.py'
+      - 'integrations/chatgpt-plugin/**'
       - 'pyproject.toml'
       - 'deeptutor/modules/manifests/core.json'
       - '.github/workflows/cvnss-hub.yml'
@@ -34,7 +37,18 @@ jobs:
       - name: Compile source and run focused tests
         run: |
           python -m compileall -q cvnss_hub
-          python -m pytest -q --noconftest tests/test_cvnss_hub.py
+          python -m pytest -q --noconftest tests/test_cvnss_hub.py tests/test_cvnss_plugin_package.py
+      - name: Build skills-only plugin archive (not a live MCP connection)
+        run: |
+          python scripts/build_cvnss_chatgpt_plugin.py
+          python - <<'PY'
+          from zipfile import ZipFile
+          with ZipFile("dist/cvnss4-knowledge-hub-0.1.0.zip") as archive:
+              names = set(archive.namelist())
+              assert "cvnss4-knowledge-hub/plugin.json" in names
+              assert "cvnss4-knowledge-hub/skills/cvnss4-tutor/SKILL.md" in names
+              assert "cvnss4-knowledge-hub/mcp.json" not in names
+          PY
       - name: Build core Python wheel
         run: python -m build --wheel --no-isolation
       - name: Verify packaged oracle and source registry
@@ -57,3 +71,8 @@ jobs:
               assert expected <= names, sorted(expected - names)
               print("Wheel contains CVNSS4.0 Hub assets")
           PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cvnss4-chatgpt-skill-only
+          path: dist/cvnss4-knowledge-hub-0.1.0.zip
+          if-no-files-found: error
