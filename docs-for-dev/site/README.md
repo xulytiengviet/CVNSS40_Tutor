@@ -33,6 +33,13 @@ Workflow build cả pull request nhưng chỉ deploy từ nhánh `main`, qua pus
 file tải xuống; máy chủ Render MCP và DeepTutor REST triển khai độc lập.
 Một lần build cục bộ không xác nhận website công khai đã cập nhật.
 
+Workflow xác minh Pages dùng nguồn `workflow` (GitHub Actions) trước khi build.
+Nếu token không có quyền đổi nguồn, workflow dừng với hướng dẫn quản trị viên
+chọn **Settings → Pages → Source → GitHub Actions**. Không để chế độ Deploy
+from a branch chạy song song: Jekyll có thể dựng README rồi ghi đè giao diện.
+Sau deploy, workflow đọc HTML công khai và `site.json`, kiểm tra marker giao diện
+và SHA commit ba lần liên tiếp trước khi báo thành công.
+
 ## Nội dung và hành vi
 
 - Các bước Plugin / MCP / REST có tab, điều khiển bằng bàn phím; không có JS vẫn

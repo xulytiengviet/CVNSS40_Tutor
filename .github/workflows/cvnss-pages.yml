@@ -30,7 +30,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  configure:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+    steps:
+      - name: Use Actions as the single Pages publishing source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          mode=$(gh api "repos/$GH_REPO/pages" --jq '.build_type')
+          echo "Current Pages source: $mode"
+          if [ "$mode" != workflow ]; then
+            if ! gh api --method PUT "repos/$GH_REPO/pages" -f build_type=workflow; then
+              echo '::error::Unable to select the Pages source. An administrator must set Settings > Pages > Build and deployment > Source to GitHub Actions, then rerun this workflow. Branch-based Pages builds can overwrite the guide with README content.'
+              exit 1
+            fi
+          fi
+          test "$(gh api "repos/$GH_REPO/pages" --jq '.build_type')" = workflow
+
   build:
+    needs: configure
+    if: always() && (needs.configure.result == 'success' || github.event_name == 'pull_request')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -58,3 +83,40 @@ jobs:
       - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify the actual public guide and revision
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          EXPECTED_REVISION: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import time
+          from urllib.request import Request, urlopen
+
+          base = os.environ['PAGE_URL'].rstrip('/') + '/'
+          expected = os.environ['EXPECTED_REVISION']
+          consecutive = 0
+          # Require repeated matching responses to catch an older concurrent
+          # branch-based deployment replacing the custom artifact.
+          for attempt in range(18):
+              try:
+                  suffix = '?revision=' + expected + '&check=' + str(attempt)
+                  headers = {'Cache-Control': 'no-cache', 'User-Agent': 'CVNSS-Pages-check'}
+                  with urlopen(Request(base + suffix, headers=headers), timeout=20) as response:
+                      html = response.read().decode('utf-8')
+                  with urlopen(Request(base + 'site.json' + suffix, headers=headers), timeout=20) as response:
+                      version = json.load(response)
+                  assert 'name="cvnss-site" content="wiki-guide"' in html, 'The URL serves another page (possibly README)'
+                  assert version['revision'] == expected, 'The URL serves an older revision'
+                  consecutive += 1
+                  print('Verified public guide:', version['revision'], 'check', consecutive)
+                  if consecutive == 3:
+                      break
+              except Exception as exc:
+                  consecutive = 0
+                  print('Waiting for the correct public guide:', str(exc))
+              time.sleep(10)
+          else:
+              raise SystemExit('Public URL did not consistently serve the deployed guide. Check the Pages source and competing deployments.')
+          PY

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from html.parser import HTMLParser
 from pathlib import Path
 import shutil
@@ -85,6 +86,10 @@ def build(out: Path) -> Path:
     name = f"{manifest['name']}-{manifest['version']}.zip"
     make_archive(out=out / "downloads" / name)
     (out / ".nojekyll").write_text("", encoding="utf-8")
+    (out / "site.json").write_text(json.dumps({
+        "site": "cvnss4-wiki-guide",
+        "revision": os.environ.get("GITHUB_SHA", "local"),
+    }) + "\n", encoding="utf-8")
     validate_site(out)
     return out
 
