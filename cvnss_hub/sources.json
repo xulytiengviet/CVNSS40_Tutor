@@ -1,0 +1,34 @@
+{
+  "schema": "cvnss4-source-registry/v1",
+  "curation": "Seed registry; not a complete crawl. Review copyright and sources before ingestion.",
+  "sources": [
+    {
+      "id": "original-portal",
+      "title": "Chữ Việt Nhanh — tài liệu nguồn",
+      "url": "https://chuvietnhanh.sourceforge.net/",
+      "authority": "primary",
+      "content_status": "linked_not_ingested"
+    },
+    {
+      "id": "formula",
+      "title": "Tóm gọn công thức CVNSS4.0",
+      "url": "https://chuvietnhanh.sourceforge.net/TomGonCongThucCVNSS.htm",
+      "authority": "primary",
+      "content_status": "linked_not_ingested"
+    },
+    {
+      "id": "converter",
+      "title": "CVNSS4.0 audit-safe v5.0",
+      "url": "https://github.com/xulytiengviet/CVNSS4.0/blob/main/assets/cvnss-converter.js",
+      "authority": "implementation",
+      "content_status": "vendored_hash_verified"
+    },
+    {
+      "id": "tutor",
+      "title": "CVNSS40_Tutor",
+      "url": "https://github.com/xulytiengviet/CVNSS40_Tutor",
+      "authority": "application",
+      "content_status": "linked"
+    }
+  ]
+}

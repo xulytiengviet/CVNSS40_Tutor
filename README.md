@@ -1,4 +1,8 @@
 <div align="center">
+> **Triển khai tự động GitHub → Render → ChatGPT:** [Hướng dẫn từng bước](deploy/cvnss-mcp/README.md) · [Render Blueprint](render.yaml) · [Dockerfile MCP](deploy/cvnss-mcp/Dockerfile). Máy chủ chưa được tạo tự động chỉ bằng commit GitHub; phải kết nối Render và cài plugin trong ChatGPT một lần.
+
+> **CVNSS4.0 Knowledge Hub** — [converter + REST/MCP](cvnss_hub/README.md) · [Hướng dẫn dùng qua plugin ChatGPT/MCP (Windows)](cvnss_hub/CHATGPT_PLUGIN.md) · [Đóng gói plugin & đồng bộ GitHub](integrations/chatgpt-plugin/GITHUB_SYNC.md). Các công cụ chuyển đổi đã tích hợp mã nguồn; kết nối ChatGPT cần một HTTPS MCP endpoint hoặc Secure MCP Tunnel và quyền tài khoản phù hợp.
+
 
 <p align="center"><img src="assets/figs/logo/color-full.png" alt="DeepTutor" width="480"></p>
 <h1 align="center">DeepTutor: Lifelong Personalized Tutoring</h1>

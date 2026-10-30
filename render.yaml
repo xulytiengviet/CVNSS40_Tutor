@@ -1,0 +1,18 @@
+# Optional Render Blueprint for a publicly readable, no-personal-data CVNSS4.0 Oracle.
+# MUST be connected to GitHub via Render dashboard to deploy. This file alone
+# does not create a Render account, domain, service, or ChatGPT plugin.
+services:
+  - type: web
+    name: cvnss40-mcp
+    runtime: docker
+    repo: https://github.com/xulytiengviet/CVNSS40_Tutor
+    branch: main
+    dockerContext: .
+    dockerfilePath: ./deploy/cvnss-mcp/Dockerfile
+    autoDeployTrigger: checksPass
+    healthCheckPath: /healthz
+    envVars:
+      - key: CVNSS_MCP_PUBLIC_ANONYMOUS
+        value: "yes"
+      - key: CVNSS_MCP_MAX_REQUESTS_PER_MINUTE
+        value: "60"

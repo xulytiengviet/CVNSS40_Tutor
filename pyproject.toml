@@ -99,7 +99,7 @@ version = {attr = "deeptutor.__version__.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["deeptutor*", "deeptutor_cli*"]
+include = ["deeptutor*", "deeptutor_cli*", "cvnss_hub*"]
 
 [tool.setuptools.package-data]
 # Runtime data shipped inside the deeptutor package: prompt YAMLs (loaded by
@@ -120,6 +120,8 @@ deeptutor = [
     "**/*.mjs",
 ]
 deeptutor_cli = ["**/*.md"]
+# Audited CVNSS4.0 Oracle assets must ship with the core wheel.
+cvnss_hub = ["oracle/*.js", "oracle/*.cjs", "*.json", "*.md"]
 deeptutor_web = ["**/*", ".next/**/*"]
 
 # ============================================

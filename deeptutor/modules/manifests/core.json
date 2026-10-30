@@ -6,7 +6,8 @@
   "optional": [],
   "paths": [
     "deeptutor/knowledge/manifest.py",
-    "deeptutor/knowledge/kb_types.py"
+    "deeptutor/knowledge/kb_types.py",
+    "cvnss_hub"
   ],
   "capabilities": {
     "chat": {
@@ -174,7 +175,14 @@
       "order": 96
     }
   },
-  "routes": [],
+  "routes": [
+    {
+      "reference": "cvnss_hub.api:router",
+      "options": {},
+      "auth": "authenticated",
+      "order": 910
+    }
+  ],
   "commands": [],
   "navigation": [],
   "services": [],
