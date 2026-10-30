@@ -99,7 +99,13 @@ ChatGPT trên web **không kết nối trực tiếp localhost**. Hai phương �
 - **Secure MCP Tunnel** (ưu tiên nếu máy chủ nằm trong máy cá nhân/mạng riêng): tạo tunnel theo hướng dẫn dành cho tài khoản/workspace của bạn, chọn server `stdio` hoặc HTTP `127.0.0.1:8000`, rồi chọn `Tunnel` trong ChatGPT. Tunnel có thể cần chính sách workspace và công cụ client tương ứng.
 - **HTTPS MCP Endpoint**: đặt một reverse proxy có TLS, xác thực và giới hạn truy cập phía trước MCP. Giữ backend bind `127.0.0.1`. Chỉ cung cấp URL thực sau khi có máy chủ và kiểm tra thành công. Không tạo URL `*.pages.dev` hoặc URL GitHub Pages giả làm MCP.
 
-Khi dùng reverse proxy, kiểm tra `Host`/`Origin` allowlist của Python MCP SDK; thông báo `421 Invalid Host` hoặc `403 Invalid Origin` nghĩa là cấu hình an ninh chưa khớp. Không tắt DNS rebinding protection trên máy chủ mở công khai. Dùng HTTPS, ủy quyền người gọi, rate limit, giới hạn nội dung và nhật ký phù hợp. HTTP MCP demo không tự tích hợp OAuth.
+Khi dùng reverse proxy, kiểm tra `Host`/`Origin` allowlist của Python MCP SDK. Có thể cấp đúng hostname đã cấu hình tại reverse proxy mà vẫn cho backend bind loopback:
+
+```powershell
+.\\.venv\\Scripts\\python.exe -m cvnss_hub.mcp_server --http --host 127.0.0.1 --port 8000 --trusted-hostname mcp.example.org
+```
+
+`mcp.example.org` **chỉ là ví dụ**, phải thay bằng hostname thật và có HTTPS/reverse proxy xác thực. Nếu client trình duyệt thực sự gửi header `Origin`, có thể cấp thêm `--trusted-origin https://app.example.org` với origin chính xác. Các tham số này **chỉ mở allowlist Host/Origin**, không bật OAuth hoặc phân quyền người dùng. Hãy buộc xác thực ở proxy/tunnel. Thông báo `421 Invalid Host` hoặc `403 Invalid Origin` nghĩa là cấu hình an ninh chưa khớp. Không tắt DNS rebinding protection trên máy chủ mở công khai. Dùng HTTPS, ủy quyền người gọi, rate limit, giới hạn nội dung và nhật ký phù hợp. HTTP MCP demo không tự tích hợp OAuth.
 
 Tài liệu:
 - https://developers.openai.com/plugins/deploy/connect-chatgpt
