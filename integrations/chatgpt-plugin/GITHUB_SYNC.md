@@ -33,6 +33,10 @@ MCP tool call -> converter/knowledge -> structured response
 
 Phần (A) cần bạn kết nối một host do mình quản lý và bật triển khai tự động. Repo và ZIP plugin **không** tự mua/tạo server, domain, OAuth hoặc kết nối với tài khoản ChatGPT.
 
+## Hướng triển khai sẵn trong repository
+
+Đã có [Render Blueprint](../../render.yaml), [MCP Dockerfile](../../deploy/cvnss-mcp/Dockerfile) và [hướng dẫn triển khai từng bước](../../deploy/cvnss-mcp/README.md). Blueprint kết nối với GitHub trên nhánh `main`, tự triển khai khi CI xanh. Bản hosted ở giai đoạn này chỉ có 6 công cụ công khai, không đăng nhập, không có bộ nhớ cá nhân; trong ChatGPT chọn **No authentication**. OAuth 2.1 là hạng mục riêng nếu mở rộng ghi dữ liệu hoặc cá nhân hóa.
+
 ## 1. Hai loại gói plugin
 
 ### 1A. Gói Skills-only hiện có (không cần URL)
