@@ -1,4 +1,4 @@
-# CVNSS4.0 Knowledge Hub · nền móng v0.1
+# CVNSS4.0 Knowledge Hub · Oracle, MCP và DeepTutor API
 
 This is an **additive, source-aware** integration for the existing DeepTutor repository.
 It does not replace the common turn runtime, RAG engines, memory L1/L2/L3, Task Board,
@@ -15,6 +15,12 @@ five critical collisions and no silent reverse-map overwrites.
 These are code audit counts, **not accuracy percentages**.
 The reverse converter can be lossy because of many-to-one mappings.
 Use `inspect` and `candidates` whenever the decode is ambiguous.
+
+## Hướng dẫn sử dụng qua ChatGPT
+
+**[Xem hướng dẫn Windows, MCP Inspector, HTTPS/Secure MCP Tunnel và plugin ChatGPT](CHATGPT_PLUGIN.md).**
+
+Không có endpoint HTTPS/MCP công khai được triển khai. Người dùng cần tự chạy server và kết nối theo quyền tài khoản/workspace.
 
 ## Usage
 Run from project root with Node.js and Python installed:
@@ -34,6 +40,9 @@ python -c "from cvnss_hub.service import execute; print(execute('audit'))"
 ```
 
 ## API integration
+
+Các route bên dưới đã được mount vào DeepTutor qua `deeptutor/modules/manifests/core.json` với policy `authenticated`; nhánh mã nguồn chỉ cung cấp route, chưa có máy chủ Internet được triển khai. Có thêm `GET /api/cvnss4/sources` để xem seed registry.
+
 `cvnss_hub.api.router` provides `/api/cvnss4/convert`, `/inspect`,
 `/candidates`, `/audit`, `/self-test`, and `/health`.
 For standalone local integration:
@@ -45,17 +54,13 @@ app = FastAPI()
 app.include_router(router)
 ```
 
-For the **DeepTutor host**, mount via the existing module route manifest,
-with its established auth policy (authenticated/learning), not an unguarded
-`app.include_router`. In particular, don't expose audit endpoints publicly
-on a multi-user installation without reviewing access policy.
-This PR deliberately does not rewrite `api/main.py` or generated router indexes.
+For the **DeepTutor host**, the core module manifest now mounts these REST routes with authentication. The separate MCP HTTP process remains independent and must be protected before remote exposure. Do not publicly expose REST or MCP without appropriate access controls.
 
 ## MCP client
 Configure a stdio server with `command: python` and
 `args: ["-m", "cvnss_hub.mcp_server"]`, from this repository root.
 Tools: cvnss_convert, cvnss_inspect, cvnss_candidates,
-cvnss_audit, cvnss_self_test. No API keys needed for deterministic conversion.
+cvnss_audit, cvnss_self_test, cvnss_sources. No API keys needed for deterministic conversion.
 This does **not** claim MCP remote deployment or a public URL.
 
 ## Knowledge, pedagogy and provenance plan
@@ -74,7 +79,7 @@ engines and DeepTutor shared memory rather than adding an opaque second memory.
 The tutor can ground answers in retrieval and delegate conversions to this oracle.
 
 ### Next host-integrated phase
-- Auth-scoped API mounting through `deeptutor/modules/manifests`.
+- Auth-scoped API mounting **đã có** qua core module manifest; cần xác minh trong instance DeepTutor đang chạy.
 - Read-only source inventory and ingestion jobs with robots/license/rate controls,
   checkpoints, deduplication, review and recorded citations.
 - Quiz/exercise builder based on verified source snippets and oracle golden vectors.
