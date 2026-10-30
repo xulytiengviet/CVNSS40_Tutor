@@ -1,6 +1,7 @@
-"""Optional, read-only CVNSS4.0 endpoints for DeepTutor FastAPI or standalone mounting."""
+"""Authenticated host-mounted, read-only CVNSS4.0 REST endpoints."""
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
+
 from .service import execute
 
 router = APIRouter(prefix="/api/cvnss4", tags=["CVNSS4.0"])
@@ -43,6 +44,11 @@ def inspect(body: WordRequest):
 @router.post("/candidates")
 def candidates(body: WordRequest):
     return run_safely("candidates", text=body.word, source=body.source)
+
+
+@router.get("/sources")
+def sources():
+    return run_safely("sources")
 
 
 @router.get("/audit")
