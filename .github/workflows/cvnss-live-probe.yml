@@ -1,0 +1,70 @@
+name: CVNSS4.0 live MCP endpoint probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cvnss-live-probe.yml'
+
+jobs:
+  probe-remote-mcp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install MCP client and HTTP library
+        run: python -m pip install 'mcp==1.30.0' 'httpx>=0.27,<1'
+      - name: Check deployed service health and actual MCP protocol
+        env:
+          MCP_URL: https://cvnss40-mcp.onrender.com/mcp
+        run: |
+          python - <<'PY'
+          import asyncio
+          import os
+          import time
+          import httpx
+          from mcp import ClientSession
+          from mcp.client.streamable_http import streamable_http_client
+
+          endpoint = os.environ["MCP_URL"]
+          health = endpoint.removesuffix("/mcp") + "/healthz"
+
+          for attempt in range(5):
+              try:
+                  response = httpx.get(health, timeout=35)
+                  print("Health status:", response.status_code)
+                  response.raise_for_status()
+                  assert response.json()["ok"] is True, response.text[:500]
+                  break
+              except Exception as exc:
+                  print("Health attempt", attempt + 1, "failed:", repr(exc))
+                  if attempt == 4:
+                      raise
+                  time.sleep(6)
+
+          async def probe():
+              async with streamable_http_client(endpoint) as (reader, writer, _):
+                  async with ClientSession(reader, writer) as session:
+                      result = await session.initialize()
+                      print("Server:", result.serverInfo.name)
+                      listing = await session.list_tools()
+                      names = {tool.name for tool in listing.tools}
+                      expected = {
+                          "cvnss_convert", "cvnss_inspect", "cvnss_candidates",
+                          "cvnss_audit", "cvnss_self_test", "cvnss_sources",
+                      }
+                      print("Discovered tools:", sorted(names))
+                      assert names == expected, f"Missing/unexpected tools: {names ^ expected}"
+                      converted = await session.call_tool("cvnss_convert", {
+                          "text": "Tiếng Việt", "mode": "cqn",
+                      })
+                      assert converted.isError is False
+                      body = converted.model_dump_json(ensure_ascii=False)
+                      print("Conversion result:", body[:800])
+                      assert "Tizb Vidf" in body, body
+
+          asyncio.run(probe())
+          PY
