@@ -13,6 +13,12 @@ Lệnh sinh thêm `mcp.json` bên trong ZIP; **không** tự tạo server, OAuth
 Mô hình đồng bộ code GitHub → host MCP → ChatGPT và hướng dẫn Refresh:
 [GitHub Sync](../integrations/chatgpt-plugin/GITHUB_SYNC.md).
 
+## Cách đồng bộ lâu dài với GitHub và Render
+
+Bản triển khai độc lập đã được bổ sung trong [render.yaml](../render.yaml) và [deploy/cvnss-mcp/Dockerfile](../deploy/cvnss-mcp/Dockerfile); xem [hướng dẫn GitHub → Render → ChatGPT](../deploy/cvnss-mcp/README.md). Bản này **công khai không đăng nhập và chỉ có sáu công cụ đọc**; khi đăng ký trong ChatGPT có thể chọn **No authentication** với điều kiện bạn đồng ý công khai dịch vụ và không gửi dữ liệu cá nhân. Không được sử dụng nó cho tài liệu học tập riêng, bộ nhớ L1–L3 hoặc thao tác ghi. Mọi dịch vụ private hoặc thao tác cá nhân hóa đều cần OAuth 2.1 / cơ chế xác thực phù hợp. `Host` allowlist và rate-limit không thay thế xác thực.
+
+Máy chủ **chưa được triển khai** chỉ bằng việc commit các tệp trên GitHub: cần liên kết tài khoản GitHub trong Render, tạo Blueprint, kiểm thử URL HTTPS thật, rồi tạo kết nối ChatGPT một lần. Sau đó, khi CI của nhánh `main` hoàn tất thành công, Render có thể tự cập nhật phiên bản mã nguồn mà không cần thay URL plugin.
+
 ## 1. Thành phần và giới hạn
 
 | Thành phần | Chức năng | Trạng thái |
