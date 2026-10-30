@@ -1,6 +1,6 @@
 # Kết nối CVNSS4.0 Knowledge Hub với ChatGPT Plugin/MCP (Windows)
 
-> Tình trạng: mã nguồn có MCP server `stdio` và `Streamable HTTP`, REST API xác thực qua DeepTutor, nhưng **chưa có HTTPS MCP URL được triển khai** và **chưa kết nối với bất kỳ tài khoản ChatGPT nào**. Hướng dẫn này phân biệt rõ chế độ thử nghiệm cục bộ với kết nối sản phẩm thực tế.
+> **Trạng thái vận hành 30/10/2026:** Render đã báo `Live` cho dịch vụ [cvnss40-mcp](https://dashboard.render.com/web/srv-dbi1sj1srm7s73d0tnb0) tại `https://cvnss40-mcp.onrender.com/mcp`. Plugin cá nhân CVNSS4.0 Knowledge Hub v0.1.0 đã được **tạo riêng trong ChatGPT** và có `mcp.json` trỏ đến URL đó. Cần **cài plugin/cho phép sử dụng** trong giao diện ChatGPT và chạy thử một lệnh `cvnss_convert` mới xác nhận được kết nối đầu cuối. Render đang tự triển khai theo `commit`, chưa phải `checksPass`. Gói MCP công khai chỉ đọc, không OAuth, không đồng bộ hồ sơ riêng/RAG.
 
 ## Đóng gói plugin từ GitHub
 
@@ -17,7 +17,7 @@ Mô hình đồng bộ code GitHub → host MCP → ChatGPT và hướng dẫn R
 
 Bản triển khai độc lập đã được bổ sung trong [render.yaml](../render.yaml) và [deploy/cvnss-mcp/Dockerfile](../deploy/cvnss-mcp/Dockerfile); xem [hướng dẫn GitHub → Render → ChatGPT](../deploy/cvnss-mcp/README.md). Bản này **công khai không đăng nhập và chỉ có sáu công cụ đọc**; khi đăng ký trong ChatGPT có thể chọn **No authentication** với điều kiện bạn đồng ý công khai dịch vụ và không gửi dữ liệu cá nhân. Không được sử dụng nó cho tài liệu học tập riêng, bộ nhớ L1–L3 hoặc thao tác ghi. Mọi dịch vụ private hoặc thao tác cá nhân hóa đều cần OAuth 2.1 / cơ chế xác thực phù hợp. `Host` allowlist và rate-limit không thay thế xác thực.
 
-Máy chủ **chưa được triển khai** chỉ bằng việc commit các tệp trên GitHub: cần liên kết tài khoản GitHub trong Render, tạo Blueprint, kiểm thử URL HTTPS thật, rồi tạo kết nối ChatGPT một lần. Sau đó, khi CI của nhánh `main` hoàn tất thành công, Render có thể tự cập nhật phiên bản mã nguồn mà không cần thay URL plugin.
+Máy chủ đã được tạo trên Render bằng Web Service tích hợp GitHub và đã báo `Live`. Plugin cá nhân cũng đã được tạo; cần cài trong ChatGPT rồi kiểm thử lệnh MCP thực tế. Tài liệu Blueprint ở dưới là phương án triển khai mới, **không** được dùng để tạo dịch vụ trùng khi dịch vụ hiện tại đã tồn tại. Sau đó, khi CI của nhánh `main` hoàn tất thành công, Render có thể tự cập nhật phiên bản mã nguồn mà không cần thay URL plugin.
 
 ## 1. Thành phần và giới hạn
 
