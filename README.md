@@ -1,4 +1,6 @@
 <div align="center">
+> **CVNSS4.0 Knowledge Hub** — [converter + REST/MCP](cvnss_hub/README.md) · [Hướng dẫn dùng qua plugin ChatGPT/MCP (Windows)](cvnss_hub/CHATGPT_PLUGIN.md). Các công cụ chuyển đổi đã tích hợp mã nguồn; kết nối ChatGPT cần một HTTPS MCP endpoint hoặc Secure MCP Tunnel và quyền tài khoản phù hợp.
+
 
 <p align="center"><img src="assets/figs/logo/color-full.png" alt="DeepTutor" width="480"></p>
 <h1 align="center">DeepTutor: Lifelong Personalized Tutoring</h1>
