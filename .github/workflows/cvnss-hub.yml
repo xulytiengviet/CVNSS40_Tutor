@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: '22'
       - name: Install minimal test dependencies
-        run: python -m pip install 'mcp>=1.26.0,<2.0.0' fastapi pytest build
+        run: python -m pip install 'mcp>=1.26.0,<2.0.0' fastapi 'pytest-asyncio>=0.23.0' pytest build setuptools wheel
       - name: Compile source and run focused tests
         run: |
           python -m compileall -q cvnss_hub
