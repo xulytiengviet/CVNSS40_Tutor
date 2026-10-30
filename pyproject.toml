@@ -121,7 +121,7 @@ deeptutor = [
 ]
 deeptutor_cli = ["**/*.md"]
 # Audited CVNSS4.0 Oracle assets must ship with the core wheel.
-cvnss_hub = ["oracle/*.js", "*.json", "*.md"]
+cvnss_hub = ["oracle/*.js", "oracle/*.cjs", "*.json", "*.md"]
 deeptutor_web = ["**/*", ".next/**/*"]
 
 # ============================================
