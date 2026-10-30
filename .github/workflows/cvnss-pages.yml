@@ -43,15 +43,22 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          mode=$(gh api "repos/$GH_REPO/pages" --jq '.build_type')
-          echo "Current Pages source: $mode"
+          if ! mode=$(gh api "repos/$GH_REPO/pages" --jq '.build_type'); then
+            echo '::error::The workflow token cannot read the Pages configuration. An administrator must select Settings > Pages > Build and deployment > Source > GitHub Actions, then rerun this workflow.'
+            exit 1
+          fi
+          echo "::notice::Current Pages publishing source: $mode"
           if [ "$mode" != workflow ]; then
             if ! gh api --method PUT "repos/$GH_REPO/pages" -f build_type=workflow; then
               echo '::error::Unable to select the Pages source. An administrator must set Settings > Pages > Build and deployment > Source to GitHub Actions, then rerun this workflow. Branch-based Pages builds can overwrite the guide with README content.'
               exit 1
             fi
           fi
-          test "$(gh api "repos/$GH_REPO/pages" --jq '.build_type')" = workflow
+          mode=$(gh api "repos/$GH_REPO/pages" --jq '.build_type')
+          if [ "$mode" != workflow ]; then
+            echo "::error::Pages still uses '$mode' instead of 'workflow'. Select Settings > Pages > Build and deployment > Source > GitHub Actions to stop the README deployment overwriting the wiki."
+            exit 1
+          fi
 
   build:
     needs: configure
