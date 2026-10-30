@@ -2,6 +2,17 @@
 
 > Tình trạng: mã nguồn có MCP server `stdio` và `Streamable HTTP`, REST API xác thực qua DeepTutor, nhưng **chưa có HTTPS MCP URL được triển khai** và **chưa kết nối với bất kỳ tài khoản ChatGPT nào**. Hướng dẫn này phân biệt rõ chế độ thử nghiệm cục bộ với kết nối sản phẩm thực tế.
 
+## Đóng gói plugin từ GitHub
+
+Gói kỹ năng tạo tự động: `py scripts/build_cvnss_chatgpt_plugin.py` → `dist/cvnss4-knowledge-hub-0.1.0.zip`.
+
+Sau khi có một MCP URL HTTPS **thật và đã kiểm tra**:
+`py scripts/build_cvnss_chatgpt_plugin.py --mcp-url https://your-real-host/mcp`.
+Lệnh sinh thêm `mcp.json` bên trong ZIP; **không** tự tạo server, OAuth, hoặc cài plugin vào ChatGPT.
+
+Mô hình đồng bộ code GitHub → host MCP → ChatGPT và hướng dẫn Refresh:
+[GitHub Sync](../integrations/chatgpt-plugin/GITHUB_SYNC.md).
+
 ## 1. Thành phần và giới hạn
 
 | Thành phần | Chức năng | Trạng thái |
