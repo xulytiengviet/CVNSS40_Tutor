@@ -4,20 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Sổ tay CVNSS4.0: từng bước dùng Plugin, MCP và API để chuyển đổi, tra cứu nguồn và khai thác tri thức có kiểm chứng.">
-  <meta name="theme-color" content="#f7f5ee">
+  <meta name="theme-color" content="#f6f6f6">
   <title>CVNSS4.0 — Sổ tay mở</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261030-wiki">
+  <script src="app.js?v=20261030-wiki" defer></script>
 </head>
 <body>
 <a class="skip" href="#noi-dung">Đến nội dung</a>
 <header class="masthead">
-  <a class="wordmark" href="#"><span class="seal" aria-hidden="true">V</span><span>CVNSS4.0<small>SỔ TAY MỞ · TIẾNG VIỆT &amp; TRI THỨC</small></span></a>
-  <div class="edition"><span>Ấn bản hướng dẫn · 2026</span><a href="https://github.com/xulytiengviet/CVNSS40_Tutor">Mã nguồn →</a></div>
+  <a class="wordmark" href="#"><span>CVNSS4.0<small>Sổ tay mở · Tiếng Việt &amp; tri thức</small></span></a>
+  <div class="edition"><span>Ấn bản hướng dẫn · 2026</span><a href="https://github.com/xulytiengviet/CVNSS40_Tutor">Mã nguồn</a></div>
 </header>
 <div class="layout">
 <aside class="sidebar" aria-label="Mục lục">
-  <p class="eyebrow">MỤC LỤC</p>
+  <p class="eyebrow">Mục lục</p>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="wiki-navigation" hidden>Mục lục và tài liệu</button>
+  <div id="wiki-navigation">
   <nav>
     <a href="#bat-dau"><span>01</span> Bắt đầu từ đây</a>
     <a href="#ket-noi"><span>02</span> Hướng dẫn kết nối</a>
@@ -28,27 +30,34 @@
     <a href="#nguon"><span>07</span> Nguồn &amp; ghi nhận</a>
   </nav>
   <div class="sidebar-note"><b>Đọc có căn cứ.</b><p>Chuyển đổi bằng Oracle.<br>Giải thích theo nguồn.<br>Nêu rõ điều chưa biết.</p></div>
-  <a class="plain-link" href="downloads/cvnss4-knowledge-hub-0.2.0.zip" download>Tải plugin v0.2.0 →</a>
-  <a class="plain-link" href="knowledge.json">Dữ liệu tri thức · JSON →</a>
+  <a class="plain-link" href="downloads/cvnss4-knowledge-hub-0.2.0.zip" download>Tải plugin v0.2.0</a>
+  <a class="plain-link" href="knowledge.json">Dữ liệu tri thức · JSON</a>
+  </div>
 </aside>
 <main id="noi-dung">
+<nav class="page-tabs" aria-label="Điều hướng trang">
+  <a href="#bat-dau" class="selected">Trang chính</a>
+  <a href="#ket-noi">Hướng dẫn</a>
+  <a href="https://github.com/xulytiengviet/CVNSS40_Tutor">Mã nguồn</a>
+  <a href="https://github.com/xulytiengviet/CVNSS40_Tutor/commits/main/">Lịch sử</a>
+</nav>
 <section id="bat-dau" class="intro">
-  <p class="eyebrow">CHỮ VIỆT NHANH · KHÔNG GIAN TRA CỨU</p>
-  <h1>Một lối vào.<br>Nhiều cách khám phá.</h1>
-  <p class="lead">Học và khai thác tri thức về <strong>CVNSS4.0</strong> qua Plugin, MCP và API — từ một phép chuyển đổi nhỏ đến những câu hỏi về khái niệm, quy tắc và ứng dụng.</p>
-  <div class="intro-bottom"><a class="button" href="#ket-noi">Bắt đầu từng bước <span aria-hidden="true">→</span></a><span class="byline">Long Ngo phát triển<br>Trần Tư Bình &amp; Kiều Trường Lâm phát kiến CVNSS4.0</span></div>
+
+  <h1>CVNSS4.0 — Sổ tay mở</h1>
+  <p class="lead">Hướng dẫn dùng <strong>Plugin, MCP và API</strong> để học, chuyển đổi và tra cứu tri thức về CVNSS4.0.</p>
+  <div class="intro-bottom"><a class="button" href="#ket-noi">Bắt đầu từng bước </a><span class="byline">Long Ngo phát triển<br>Trần Tư Bình &amp; Kiều Trường Lâm phát kiến CVNSS4.0</span></div>
 </section>
-<div class="margin-note"><span class="note-marker">i</span><p><strong>Trước khi bắt đầu.</strong> Website này là tài liệu tĩnh trên GitHub Pages. Chuyển đổi chạy tại máy chủ MCP hoặc máy của bạn. Khung tri thức v0.2.0 đang ở trạng thái <em>bản nháp</em>; liên kết nguồn chưa đồng nghĩa với tài liệu đã nhập toàn văn.</p></div>
+<div class="margin-note"><p><strong>Trước khi bắt đầu.</strong> Website này là tài liệu tĩnh trên GitHub Pages. Chuyển đổi chạy tại máy chủ MCP hoặc máy của bạn. Khung tri thức v0.2.0 đang ở trạng thái <em>bản nháp</em>; liên kết nguồn chưa đồng nghĩa với tài liệu đã nhập toàn văn.</p></div>
 <section class="section" aria-labelledby="chon-loi">
-  <div class="section-head"><p class="eyebrow">BA LỐI TIẾP CẬN</p><h2 id="chon-loi">Chọn cách phù hợp với bạn</h2></div>
+  <div class="section-head"><p class="eyebrow">Bắt đầu</p><h2 id="chon-loi">Chọn cách phù hợp với bạn</h2></div>
   <div class="routes">
-    <a href="#plugin" data-guide-link="plugin"><span class="route-number">I.</span><h3>Plugin</h3><p>Hỏi bằng tiếng Việt trong ChatGPT. Phù hợp để học, tra cứu và luyện tập.</p><span class="text-link">Dành cho người học →</span></a>
-    <a href="#mcp" data-guide-link="mcp"><span class="route-number">II.</span><h3>MCP</h3><p>Kết nối Oracle với ứng dụng AI. Gọi công cụ có tham số và kết quả rõ ràng.</p><span class="text-link">Dành cho ứng dụng AI →</span></a>
-    <a href="#api" data-guide-link="api"><span class="route-number">III.</span><h3>REST API</h3><p>Tích hợp chuyển đổi và danh mục tri thức vào phần mềm qua HTTP.</p><span class="text-link">Dành cho lập trình viên →</span></a>
+    <a href="#plugin" data-guide-link="plugin"><span class="route-number">I.</span><h3>Plugin</h3><p>Hỏi bằng tiếng Việt trong ChatGPT. Phù hợp để học, tra cứu và luyện tập.</p><span class="text-link">Dành cho người học</span></a>
+    <a href="#mcp" data-guide-link="mcp"><span class="route-number">II.</span><h3>MCP</h3><p>Kết nối Oracle với ứng dụng AI. Gọi công cụ có tham số và kết quả rõ ràng.</p><span class="text-link">Dành cho ứng dụng AI</span></a>
+    <a href="#api" data-guide-link="api"><span class="route-number">III.</span><h3>REST API</h3><p>Tích hợp chuyển đổi và danh mục tri thức vào phần mềm qua HTTP.</p><span class="text-link">Dành cho lập trình viên</span></a>
   </div>
 </section>
 <section id="ket-noi" class="section">
-  <div class="section-head"><p class="eyebrow">02 / HƯỚNG DẪN KẾT NỐI</p><h2>Từ kết nối đến câu hỏi đầu tiên</h2><p>Chọn một lối. Làm lần lượt, rồi kiểm tra kết quả.</p></div>
+  <div class="section-head"><p class="eyebrow">Hướng dẫn</p><h2>Hướng dẫn từng bước</h2><p>Chọn một lối. Làm lần lượt, rồi kiểm tra kết quả.</p></div>
   <div class="guide-tabs" role="tablist" aria-label="Cách kết nối" hidden>
     <button id="tab-plugin" role="tab" aria-selected="true" aria-controls="plugin" data-tab="plugin">I. Plugin / ChatGPT</button>
     <button id="tab-mcp" role="tab" aria-selected="false" aria-controls="mcp" data-tab="mcp" tabindex="-1">II. MCP</button>
@@ -77,7 +86,7 @@ python -m venv .venv
 .venv/bin/python -m cvnss_hub.mcp_server --http --port 8000</code></pre><button class="copy" type="button">Sao chép</button></div><p class="fine">Trên Windows, thay <code>python</code> đầu tiên bằng <code>py</code> và <code>.venv/bin/python</code> bằng <code>.venv\Scripts\python.exe</code>. Giữ terminal máy chủ đang chạy.</p></li>
       <li><h4>Hoặc dùng stdio cho ứng dụng cục bộ</h4><p>Trong trình khách hỗ trợ stdio, đặt lệnh là đường dẫn tuyệt đối tới Python của venv; tham số <code>["-m", "cvnss_hub.mcp_server"]</code>; thư mục làm việc là kho mã. Chế độ stdio không có URL. Tên trường cấu hình tùy trình khách.</p></li>
       <li><h4>Kết nối Streamable HTTP</h4><p>Mở terminal khác và chạy Inspector:</p><div class="code-box"><pre><code>npx --yes @modelcontextprotocol/inspector@latest</code></pre><button class="copy" type="button">Sao chép</button></div><p>Trong Inspector, chọn <strong>Streamable HTTP</strong> và Connect tới <code>http://127.0.0.1:8000/mcp</code> khi chạy cục bộ, hoặc <code>https://cvnss40-mcp.onrender.com/mcp</code> khi dùng dịch vụ từ xa. ChatGPT web cần HTTPS hoặc tunnel được hỗ trợ, không dùng localhost trực tiếp.</p></li>
-      <li><h4>Khám phá rồi gọi công cụ</h4><p>Chọn List Tools → <code>cvnss_self_test</code> với tham số <code>{}</code>. Kỳ vọng <code>ok: true</code>, <code>tests: 23</code>, <code>failures: []</code>. Sau đó gọi <code>cvnss_convert</code> với:</p><div class="code-box"><pre><code>{"text": "Tiếng Việt", "mode": "cqn"}</code></pre><button class="copy" type="button">Sao chép</button></div><p><code>mode</code> mô tả <strong>định dạng đầu vào</strong>; kết quả trả các dạng <code>cqn</code>, <code>cvn</code> và <code>cvss</code>.</p></li>
+      <li><h4>Khám phá rồi gọi công cụ</h4><p>Chọn List Tools <code>cvnss_self_test</code> với tham số <code>{}</code>. Kỳ vọng <code>ok: true</code>, <code>tests: 23</code>, <code>failures: []</code>. Sau đó gọi <code>cvnss_convert</code> với:</p><div class="code-box"><pre><code>{"text": "Tiếng Việt", "mode": "cqn"}</code></pre><button class="copy" type="button">Sao chép</button></div><p><code>mode</code> mô tả <strong>định dạng đầu vào</strong>; kết quả trả các dạng <code>cqn</code>, <code>cvn</code> và <code>cvss</code>.</p></li>
       <li><h4>Kiểm tra nguồn và giới hạn</h4><p>Gọi <code>cvnss_sources({})</code>, rồi <code>cvnss_knowledge({"topic":"concepts"})</code> nếu máy chủ có công cụ này. Giữ nguyên nhãn bằng chứng và trạng thái duyệt khi dùng kết quả để trả lời. Khi giải mã, gọi <code>cvnss_inspect</code> để xem các ứng viên.</p></li>
     </ol>
   </article>
@@ -87,7 +96,7 @@ python -m venv .venv
     <ol class="steps">
       <li><h4>Chuẩn bị máy chủ DeepTutor</h4><p>Người quản trị cần cài và khởi động DeepTutor theo <a href="https://github.com/xulytiengviet/CVNSS40_Tutor/blob/main/docs-for-dev/AGENT_SETUP.md">hướng dẫn môi trường</a>. Lấy địa chỉ máy chủ, ví dụ <code>http://127.0.0.1:8001</code> khi chạy tại máy mình, rồi xác minh route trong OpenAPI của instance đó.</p></li>
       <li><h4>Xác thực theo cơ chế máy chủ</h4><p>Đăng nhập DeepTutor bằng tài khoản của bạn. Ví dụ dưới dùng phiên trình duyệt cùng origin đã đăng nhập; không giả định có API key hay Bearer token dùng chung. Nếu dùng curl hoặc ứng dụng khác, làm theo cơ chế xác thực được cấu hình trên máy chủ và bảo vệ thông tin phiên.</p></li>
-      <li><h4>Gọi API chuyển đổi</h4><p>Mở Developer Tools → Console ngay trên trang DeepTutor của bạn, kiểm tra đoạn mã rồi chạy:</p><div class="code-box"><pre><code>const response = await fetch('/api/cvnss4/convert', {
+      <li><h4>Gọi API chuyển đổi</h4><p>Mở Developer Tools Console ngay trên trang DeepTutor của bạn, kiểm tra đoạn mã rồi chạy:</p><div class="code-box"><pre><code>const response = await fetch('/api/cvnss4/convert', {
   method: 'POST',
   credentials: 'same-origin',
   headers: {'Content-Type': 'application/json'},
@@ -105,7 +114,7 @@ console.log(await response.json());</code></pre><button class="copy" type="butto
   </article>
 </section>
 <section id="cong-cu" class="section">
-  <div class="section-head"><p class="eyebrow">03 / SỔ TRA CỨU</p><h2>Công cụ &amp; endpoint</h2><p>Hợp đồng của mã nguồn v0.2.0. Máy chủ đang triển khai có thể cần cập nhật.</p></div>
+  <div class="section-head"><p class="eyebrow">Tra cứu</p><h2>Công cụ &amp; endpoint</h2><p>Hợp đồng của mã nguồn v0.2.0. Máy chủ đang triển khai có thể cần cập nhật.</p></div>
   <div class="endpoint-note"><span class="label">MCP</span><code>https://cvnss40-mcp.onrender.com/mcp</code><span class="label">HEALTH</span><code>https://cvnss40-mcp.onrender.com/healthz</code></div>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Bảng công cụ và REST endpoint"><table>
     <thead><tr><th>Công cụ MCP</th><th>Tham số / chức năng</th><th>REST trên DeepTutor</th></tr></thead>
@@ -120,12 +129,12 @@ console.log(await response.json());</code></pre><button class="copy" type="butto
       <tr><td>—</td><td>Sức khỏe tích hợp: kiểm kê Oracle.</td><td><b>GET</b> <code>/api/cvnss4/health</code></td></tr>
     </tbody>
   </table></div>
-  <p class="fine">MCP dùng giao thức initialize → tools/list → tools/call; tên công cụ không phải đường dẫn URL. Bản hosted giới hạn dung lượng yêu cầu và tần suất theo tiến trình. Với giới hạn ký tự, byte JSON và UTF-8 vẫn có thể khiến yêu cầu vượt dung lượng HTTP.</p>
+  <p class="fine">MCP dùng giao thức initialize tools/list tools/call; tên công cụ không phải đường dẫn URL. Bản hosted giới hạn dung lượng yêu cầu và tần suất theo tiến trình. Với giới hạn ký tự, byte JSON và UTF-8 vẫn có thể khiến yêu cầu vượt dung lượng HTTP.</p>
 </section>
 <section id="tri-thuc" class="section">
-  <div class="section-head"><p class="eyebrow">04 / BẢN ĐỒ TRI THỨC</p><h2>Tìm câu hỏi trước, tìm bằng chứng sau.</h2><p>Mười nhóm để tổ chức việc học và chuẩn hóa. Mỗi mục bên dưới là hướng nghiên cứu cần đối chiếu, chưa phải kết luận chính thức.</p></div>
+  <div class="section-head"><p class="eyebrow">Tri thức</p><h2>Danh mục tri thức</h2><p>Mười nhóm để tổ chức việc học và chuẩn hóa. Mỗi mục bên dưới là hướng nghiên cứu cần đối chiếu, chưa phải kết luận chính thức.</p></div>
   <label class="search-label" for="knowledge-search">Tìm chủ đề hoặc từ khóa</label>
-  <div class="search-box"><span aria-hidden="true">/</span><input id="knowledge-search" type="search" placeholder="Ví dụ: quy tắc, lịch sử, ứng dụng…" autocomplete="off"><kbd aria-hidden="true">/</kbd></div>
+  <div class="search-box"><input id="knowledge-search" type="search" placeholder="Ví dụ: quy tắc, lịch sử, ứng dụng…" autocomplete="off"><kbd aria-hidden="true">/</kbd></div>
   <p id="search-status" class="fine" role="status" aria-live="polite">10 chủ đề · khung tri thức bản nháp</p>
   <div id="knowledge-topics" class="topics">
     <article data-topic="history"><span class="topic-id">history</span><h3>Khởi đầu &amp; lịch sử</h3><p>Tác giả, mục tiêu, mốc thời gian và thay đổi giữa các phiên bản.</p></article>
@@ -143,7 +152,7 @@ console.log(await response.json());</code></pre><button class="copy" type="butto
   <details class="reading"><summary>Cách đọc một mục tri thức</summary><div><p><code>evidence_type</code> cho biết đó là nguồn gốc, hành vi thực thi, thực nghiệm, đề xuất hay chưa kiểm chứng. <code>review_status</code> là trạng thái duyệt riêng; một đề xuất đã duyệt vẫn là đề xuất.</p><p>Chỉ gọi một mục là “đã duyệt” khi có nguồn, vị trí trích dẫn, người duyệt và ngày duyệt; phát biểu từ nguồn gốc cần cả trích đoạn. Xem <a href="knowledge.json">dữ liệu gốc</a>, <a href="knowledge.schema.json">JSON Schema</a> và <a href="standardization.md">đề xuất chuẩn hóa</a>.</p></div></details>
 </section>
 <section id="thuc-hanh" class="section">
-  <div class="section-head"><p class="eyebrow">05 / THỰC HÀNH CÓ NGUỒN</p><h2>Hỏi đúng để học sâu hơn</h2></div>
+  <div class="section-head"><p class="eyebrow">Thực hành</p><h2>Hỏi đúng để học sâu hơn</h2></div>
   <div class="prompt-list">
     <div><span class="label">NGƯỜI MỚI</span><div class="code-box"><pre><code>Gọi cvnss_knowledge với topic="concepts" và cvnss_sources.
 Phân biệt định nghĩa có nguồn với đề xuất còn chờ đối chiếu.
@@ -161,7 +170,7 @@ Không tạo ví dụ chưa được Oracle kiểm chứng.</code></pre><button 
   <p class="fine">Oracle giải mã <code>ed</code> thành các ứng viên <code>ề</code> và <code>oet</code>, chọn mặc định <code>ề</code>. 23 ca tự kiểm tra không phải tỷ lệ chính xác trên mọi văn bản. Plugin hiện không ghi tiến độ học, lưu bộ nhớ cá nhân hoặc tự nhập toàn bộ tài liệu nguồn.</p>
 </section>
 <section id="go-roi" class="section">
-  <div class="section-head"><p class="eyebrow">06 / KHI CẦN GỠ RỐI</p><h2>Kiểm tra đúng chỗ</h2></div>
+  <div class="section-head"><p class="eyebrow">Trợ giúp</p><h2>Kiểm tra đúng chỗ</h2></div>
   <details><summary>Không tìm thấy chức năng thêm plugin hoặc MCP?</summary><p>Kiểm tra quyền tài khoản, chính sách workspace và phiên bản giao diện. Tìm hướng dẫn kết nối MCP của nhà cung cấp. File ZIP không tự mở quyền hoặc cài một máy chủ.</p></details>
   <details><summary>Máy chủ có 6 công cụ, thiếu cvnss_knowledge?</summary><p>Máy chủ có thể còn chạy mã cũ. Người quản trị triển khai v0.2.0, sau đó bạn làm mới danh sách công cụ trong plugin và mở cuộc trò chuyện mới. Trong lúc chờ, đọc tài liệu tri thức đi kèm ZIP.</p></details>
   <details><summary>GET /mcp trả lỗi, hoặc trình duyệt không hiện trang?</summary><p>MCP cần khởi tạo giao thức và gọi công cụ bằng trình khách tương thích. Dùng Inspector để kiểm tra. <code>/healthz</code> chỉ cho biết phản hồi sức khỏe, chưa chứng minh phép chuyển đổi hoạt động.</p></details>
@@ -170,12 +179,11 @@ Không tạo ví dụ chưa được Oracle kiểm chứng.</code></pre><button 
   <details><summary>Hỏi toàn bộ tri thức nhưng chỉ nhận liên kết hoặc bản nháp?</summary><p>Đó là giới hạn dữ liệu hiện có. <code>linked_not_ingested</code> là nguồn chưa nhập toàn văn. Muốn hỏi đáp toàn bộ tài liệu, cần thu thập đúng quyền, duyệt nội dung rồi kết nối kho RAG đã lập chỉ mục.</p></details>
 </section>
 <section id="nguon" class="section sources-section">
-  <div class="section-head"><p class="eyebrow">07 / NGUỒN &amp; GHI NHẬN</p><h2>Tri thức cần một nơi để đối chiếu.</h2></div>
+  <div class="section-head"><p class="eyebrow">Tài liệu</p><h2>Nguồn tài liệu và ghi nhận</h2></div>
   <ul class="source-list">
-    <li><span>01 / NGUỒN SƠ CẤP</span><a href="https://chuvietnhanh.sourceforge.net/">Chữ Việt Nhanh →</a><small>Cổng tài liệu nguồn; trạng thái trong registry: chưa nhập toàn văn.</small></li>
-    <li><span>02 / CÔNG THỨC</span><a href="https://chuvietnhanh.sourceforge.net/TomGonCongThucCVNSS.htm">Tóm gọn công thức CVNSS4.0 →</a><small>Đối chiếu phiên bản và vị trí trích dẫn trước khi chuẩn hóa.</small></li>
-    <li><span>03 / MÃ NGUỒN</span><a href="https://github.com/xulytiengviet/CVNSS40_Tutor">CVNSS40_Tutor →</a><small>Oracle, MCP, REST, registry và bộ kiểm thử.</small></li>
-    <li><span>04 / CẢM HỨNG TRÌNH BÀY</span><a href="https://ternary.wiki/t/Index">Ternary Wiki →</a><small>Tinh thần wiki đơn giản, cổ điển và ưu tiên liên kết tra cứu.</small></li>
+    <li><span>Nguồn sơ cấp</span><a href="https://chuvietnhanh.sourceforge.net/">Chữ Việt Nhanh</a><small>Cổng tài liệu nguồn; trạng thái trong registry: chưa nhập toàn văn.</small></li>
+    <li><span>Công thức</span><a href="https://chuvietnhanh.sourceforge.net/TomGonCongThucCVNSS.htm">Tóm gọn công thức CVNSS4.0</a><small>Đối chiếu phiên bản và vị trí trích dẫn trước khi chuẩn hóa.</small></li>
+    <li><span>Mã nguồn</span><a href="https://github.com/xulytiengviet/CVNSS40_Tutor">CVNSS40_Tutor</a><small>Oracle, MCP, REST, registry và bộ kiểm thử.</small></li>
   </ul>
   <div class="credits"><p><strong>Trần Tư Bình</strong> và <strong>Kiều Trường Lâm</strong> phát kiến CVNSS4.0.</p><p>Trang hướng dẫn do <strong>Long Ngo</strong> phát triển. Phần mã và nội dung mới của trang này được cấp phép <a href="LICENSE.txt">MIT</a>. Mã DeepTutor có sẵn giữ giấy phép <a href="https://github.com/xulytiengviet/CVNSS40_Tutor/blob/main/LICENSE">Apache-2.0</a>; tài liệu và thành phần bên thứ ba giữ quyền tương ứng.</p></div>
 </section>

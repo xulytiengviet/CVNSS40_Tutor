@@ -1,6 +1,12 @@
 /* MIT License · Copyright (c) 2026 Long Ngo */
 'use strict';
 document.documentElement.classList.add('js');
+const menuToggle = document.querySelector('.menu-toggle');
+menuToggle.hidden = false;
+menuToggle.addEventListener('click', () => {
+  const open = document.querySelector('.sidebar').classList.toggle('menu-open');
+  menuToggle.setAttribute('aria-expanded', String(open));
+});
 const tabs = [...document.querySelectorAll('[data-tab]')];
 const panels = [...document.querySelectorAll('.guide-panel')];
 const tablist = document.querySelector('.guide-tabs');
@@ -81,7 +87,7 @@ document.querySelectorAll('.copy').forEach(button => {
       range.selectNodeContents(code);
       selection.removeAllRanges();
       selection.addRange(range);
-      notice('Đã chọn nội dung. Nhấn Ctrl+C hoặc ⌘C để sao chép.');
+      notice('Đã chọn nội dung. Nhấn Ctrl+C hoặc Command+C để sao chép.');
     }
   });
 });

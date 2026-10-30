@@ -1,7 +1,8 @@
 # CVNSS4.0 — Sổ tay mở
 
 Trang hướng dẫn tiếng Việt, HTML/CSS/JS thuần, không cần Node hoặc bước cài gói.
-Phong cách wiki cổ điển: chữ serif, nền giấy, mục lục bên trái, liên kết tra cứu,
+Phong cách wiki cổ điển tối giản: chữ sans-serif hỗ trợ tiếng Việt, nền trắng,
+mục lục bên trái và các khung liên kết xanh,
 không dùng font hoặc script từ dịch vụ ngoài.
 
 ## Build và xem tại máy
